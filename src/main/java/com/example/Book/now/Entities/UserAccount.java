@@ -24,7 +24,7 @@ public class UserAccount implements UserDetails {
     private String email;
     private String password;
     private String lastLogin;
-    private Integer failed_login_attempts;
+    private Integer failedLoginAttempts;
     private Boolean emailVerified;
     private RoleType role;
 
