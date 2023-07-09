@@ -1,9 +1,7 @@
 package com.example.Book.now.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,6 +24,8 @@ public class UserAccount implements UserDetails {
     private String lastLogin;
     private Integer failedLoginAttempts;
     private Boolean emailVerified;
+
+    @Enumerated(EnumType.STRING)
     private RoleType role;
 
     @Override
