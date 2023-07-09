@@ -16,15 +16,15 @@ public class Vehicle {
     private String name;
     private String brand;
     private Integer year;
-    private String vehicle_type;
-    private Integer num_of_seats;
+    private String vehicleType;
+    private Integer numOfSeats;
     private Integer mileage;
     @Enumerated(EnumType.STRING)
-    private TransmissionType transmissionEnum;
+    private TransmissionType transmission;
     @Enumerated(EnumType.STRING)
-    private FuelType fuelEnum;
-    private Integer num_of_bags;
-    private Integer num_of_doors;
+    private FuelType fuel;
+    private Integer numOfBags;
+    private Integer numOfDoors;
     private Boolean ac;
     private String photo;
 
