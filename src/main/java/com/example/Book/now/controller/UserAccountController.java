@@ -2,6 +2,7 @@ package com.example.Book.now.controller;
 
 import com.example.Book.now.Entities.UserAccount;
 import com.example.Book.now.RequestBodies.LoginRequestBody;
+import com.example.Book.now.responseBodies.AuthenticationDTO;
 import com.example.Book.now.service.UserAccountService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class UserAccountController {
     private final UserAccountService userAccountService;
 
     @PostMapping("/login")
-    public String userAccountLogin(@RequestBody LoginRequestBody request){
+    public AuthenticationDTO userAccountLogin(@RequestBody LoginRequestBody request){
         return userAccountService.loginUserAccount(request);
     }
 

@@ -3,6 +3,7 @@ package com.example.Book.now.service;
 import com.example.Book.now.Entities.UserAccount;
 import com.example.Book.now.RequestBodies.LoginRequestBody;
 import com.example.Book.now.repository.UserAccountRepository;
+import com.example.Book.now.responseBodies.AuthenticationDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,10 +23,10 @@ public class UserAccountService {
                 .orElseThrow(() -> new RuntimeException("Error"));
     };
 
-    public String loginUserAccount(LoginRequestBody request){
+    public AuthenticationDTO loginUserAccount(LoginRequestBody request){
         var authUser = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         var jwtToken = jwtService.generateToken(authUser);
-        return jwtToken;
+        return new AuthenticationDTO(jwtToken, Boolean.TRUE);
     }
 
 }
