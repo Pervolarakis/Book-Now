@@ -6,10 +6,8 @@ import com.example.Book.now.responseBodies.AuthenticationDTO;
 import com.example.Book.now.service.UserAccountService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -19,10 +17,11 @@ public class UserAccountController {
     private final UserAccountService userAccountService;
 
     @PostMapping("/login")
-    public AuthenticationDTO userAccountLogin(@RequestBody LoginRequestBody request){
-        return userAccountService.loginUserAccount(request);
+    public ResponseEntity<AuthenticationDTO> userAccountLogin(@RequestBody LoginRequestBody request){
+        return ResponseEntity.ok(userAccountService.loginUserAccount(request));
     }
 
+    //TODO CHANGE TO DTO
     @PostMapping()
     public UserAccount getUser(@RequestBody LoginRequestBody request){
         return userAccountService.findUserAccountByEmail(request.getEmail());
