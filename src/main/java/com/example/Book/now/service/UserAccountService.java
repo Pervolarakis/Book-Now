@@ -19,7 +19,7 @@ public class UserAccountService {
     private final JwtService jwtService;
 
     public UserAccount findUserAccountByEmail(String email){
-        return userAccountRepository.findUserAccountByEmail(email)
+        return userAccountRepository.findUserAccountByEmailIgnoreCase(email)
                 .orElseThrow(() -> new RuntimeException("Error"));
     };
 
