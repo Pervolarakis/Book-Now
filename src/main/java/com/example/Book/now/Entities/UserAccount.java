@@ -1,6 +1,5 @@
 package com.example.Book.now.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,12 +21,12 @@ public class UserAccount implements UserDetails {
     private Integer userId;
     private String email;
     private String password;
-    private String lastLogin;
+    private Date lastLogin;
     private Integer failedLoginAttempts;
     private Boolean emailVerified;
 
     @Enumerated(EnumType.STRING)
-    private RoleType role;
+    private RoleEnum role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

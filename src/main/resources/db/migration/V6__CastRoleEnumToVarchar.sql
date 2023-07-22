@@ -1,0 +1,1 @@
+create cast (varchar as roleenum) with inout as implicit;

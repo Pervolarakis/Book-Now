@@ -10,11 +10,12 @@ import java.util.Date;
 @Getter
 @Setter
 public class UserProfile {
-
     @Id
+    private Integer id;
+    @MapsId
     @OneToOne(fetch = FetchType.LAZY, targetEntity = UserAccount.class)
     @JoinColumn(name = "user_id", referencedColumnName = "userId", nullable = false)
-    private Integer userId;
+    private UserAccount userId;
     private String firstName;
     private String lastName;
     private String phone;

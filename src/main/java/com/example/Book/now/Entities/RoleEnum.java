@@ -1,6 +1,6 @@
 package com.example.Book.now.Entities;
 
-public enum RoleType {
+public enum RoleEnum {
     USER,
     ADMIN
 }

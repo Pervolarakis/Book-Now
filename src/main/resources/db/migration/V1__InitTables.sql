@@ -19,13 +19,12 @@ create table vehicle (
 );
 
 create table user_account(
-	user_id integer unique,
+	user_id SERIAL primary key,
 	email varchar(40) unique,
 	password text,
 	last_login date,
 	failed_login_attempts integer,
-	email_verified boolean,
-	primary key(user_id)
+	email_verified boolean
 );
 
 create table user_profile(

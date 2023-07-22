@@ -17,4 +17,10 @@ public class GlobalExceptionHandler {
         return "wrong pass dude";
     }
 
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public String handleUserAlreadyExistsException(UserAlreadyExistsException exception){
+        return "User already exists.";
+    }
 }
