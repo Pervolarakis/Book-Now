@@ -30,4 +30,25 @@ public class GlobalExceptionHandler {
     public String handleCannotSendEmailException(CannotSendEmailException exception){
         return "Mail service down";
     }
+
+    @ExceptionHandler(EmailAlreadyVerifiedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public String handleEmailAlreadyVerifiedException(EmailAlreadyVerifiedException exception){
+        return "Email Already verified";
+    }
+
+    @ExceptionHandler(EmailNotVerifiedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public String handleEmailNotVerifiedException(EmailNotVerifiedException exception){
+        return "Email not verified, please check your inbox";
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public String handleUserNotFoundException(UserAlreadyExistsException exception){
+        return "Invalid user";
+    }
 }

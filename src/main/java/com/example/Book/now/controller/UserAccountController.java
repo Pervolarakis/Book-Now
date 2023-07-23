@@ -4,6 +4,7 @@ import com.example.Book.now.Entities.UserAccount;
 import com.example.Book.now.RequestBodies.LoginRequestBody;
 import com.example.Book.now.RequestBodies.RegisterRequestBody;
 import com.example.Book.now.exceptions.CannotSendEmailException;
+import com.example.Book.now.exceptions.EmailNotVerifiedException;
 import com.example.Book.now.exceptions.UserAlreadyExistsException;
 import com.example.Book.now.responseBodies.AuthenticationDTO;
 import com.example.Book.now.service.UserAccountService;
@@ -20,7 +21,7 @@ public class UserAccountController {
     private final UserAccountService userAccountService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationDTO> userAccountLogin(@RequestBody LoginRequestBody request){
+    public ResponseEntity<AuthenticationDTO> userAccountLogin(@RequestBody LoginRequestBody request) throws EmailNotVerifiedException {
         return ResponseEntity.ok(userAccountService.loginUserAccount(request));
     }
 

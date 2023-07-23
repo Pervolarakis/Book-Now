@@ -6,6 +6,7 @@ import com.example.Book.now.Entities.UserProfile;
 import com.example.Book.now.RequestBodies.LoginRequestBody;
 import com.example.Book.now.RequestBodies.RegisterRequestBody;
 import com.example.Book.now.exceptions.CannotSendEmailException;
+import com.example.Book.now.exceptions.EmailNotVerifiedException;
 import com.example.Book.now.exceptions.UserAlreadyExistsException;
 import com.example.Book.now.repository.UserAccountRepository;
 import com.example.Book.now.repository.UserProfileRepository;
@@ -35,8 +36,12 @@ public class UserAccountService {
                 .orElseThrow(() -> new RuntimeException("Error"));
     };
 
-    public AuthenticationDTO loginUserAccount(LoginRequestBody request){
+    public AuthenticationDTO loginUserAccount(LoginRequestBody request) throws EmailNotVerifiedException {
         var authUser = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        Boolean isAccountVerified = userAccountRepository.findUserAccountByEmailIgnoreCase(authUser.getName()).get().getEmailVerified();
+        if (!isAccountVerified){
+            throw new EmailNotVerifiedException();
+        }
         var jwtToken = jwtService.generateToken(authUser);
         return new AuthenticationDTO(jwtToken, Boolean.TRUE);
     }
