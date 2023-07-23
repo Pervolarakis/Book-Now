@@ -3,6 +3,7 @@ package com.example.Book.now.controller;
 import com.example.Book.now.Entities.UserAccount;
 import com.example.Book.now.RequestBodies.LoginRequestBody;
 import com.example.Book.now.RequestBodies.RegisterRequestBody;
+import com.example.Book.now.exceptions.CannotSendEmailException;
 import com.example.Book.now.exceptions.UserAlreadyExistsException;
 import com.example.Book.now.responseBodies.AuthenticationDTO;
 import com.example.Book.now.service.UserAccountService;
@@ -24,7 +25,7 @@ public class UserAccountController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationDTO> userAccountRegister(@Valid @RequestBody RegisterRequestBody requestBody) throws UserAlreadyExistsException {
+    public ResponseEntity<AuthenticationDTO> userAccountRegister(@Valid @RequestBody RegisterRequestBody requestBody) throws UserAlreadyExistsException, CannotSendEmailException {
         return ResponseEntity.ok(userAccountService.registerUserAccount(requestBody));
     }
 

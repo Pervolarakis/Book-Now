@@ -23,4 +23,11 @@ public class GlobalExceptionHandler {
     public String handleUserAlreadyExistsException(UserAlreadyExistsException exception){
         return "User already exists.";
     }
+
+    @ExceptionHandler(CannotSendEmailException.class)
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    @ResponseBody
+    public String handleCannotSendEmailException(CannotSendEmailException exception){
+        return "Mail service down";
+    }
 }

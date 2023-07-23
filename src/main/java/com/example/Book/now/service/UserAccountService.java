@@ -5,6 +5,7 @@ import com.example.Book.now.Entities.UserAccount;
 import com.example.Book.now.Entities.UserProfile;
 import com.example.Book.now.RequestBodies.LoginRequestBody;
 import com.example.Book.now.RequestBodies.RegisterRequestBody;
+import com.example.Book.now.exceptions.CannotSendEmailException;
 import com.example.Book.now.exceptions.UserAlreadyExistsException;
 import com.example.Book.now.repository.UserAccountRepository;
 import com.example.Book.now.repository.UserProfileRepository;
@@ -26,6 +27,8 @@ public class UserAccountService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final UserProfileRepository userProfileRepository;
+    private final MailJwtService mailJwtService;
+    private final MailService mailService;
 
     public UserAccount findUserAccountByEmail(String email){
         return userAccountRepository.findUserAccountByEmailIgnoreCase(email)
@@ -38,7 +41,7 @@ public class UserAccountService {
         return new AuthenticationDTO(jwtToken, Boolean.TRUE);
     }
 
-    public AuthenticationDTO registerUserAccount(RegisterRequestBody requestBody) throws UserAlreadyExistsException {
+    public AuthenticationDTO registerUserAccount(RegisterRequestBody requestBody) throws UserAlreadyExistsException, CannotSendEmailException {
         if (userAccountRepository.findUserAccountByEmailIgnoreCase(requestBody.getEmail()).isPresent()){
             throw new UserAlreadyExistsException();
         }
@@ -62,7 +65,9 @@ public class UserAccountService {
         userProfile.setDateOfBirth(requestBody.getDateOfBirth());
         userProfileRepository.save(userProfile);
 
-        return new AuthenticationDTO("", Boolean.TRUE);
+        mailService.sendVerificationMail(userAccount.getEmail());
+
+        return new AuthenticationDTO("A verification email has been sent to your email!", Boolean.TRUE);
 
     }
 
