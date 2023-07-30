@@ -13,8 +13,10 @@ import java.util.Date;
 public class RegisterRequestBody {
 
     @Email(message = "Please provide a valid email")
+    @NotBlank(message = "Email cannot be empty!")
     private String email;
     @Size(min = 8, message = "Please provide a password longer than 8 characters")
+    @NotBlank(message = "Email cannot be empty!")
     private String password;
     @NotBlank(message = "First name cannot be empty!")
     private String firstName;
