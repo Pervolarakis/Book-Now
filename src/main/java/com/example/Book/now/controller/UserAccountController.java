@@ -21,7 +21,7 @@ public class UserAccountController {
     private final UserAccountService userAccountService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationDTO> userAccountLogin(@RequestBody LoginRequestBody request) throws EmailNotVerifiedException {
+    public ResponseEntity<AuthenticationDTO> userAccountLogin(@Valid @RequestBody LoginRequestBody request) throws EmailNotVerifiedException {
         return ResponseEntity.ok(userAccountService.loginUserAccount(request));
     }
 
