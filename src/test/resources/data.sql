@@ -116,10 +116,10 @@ insert into vehicle (vehicle_id, name, brand, vehicle_year, vehicle_type, num_of
 insert into vehicle (vehicle_id, name, brand, vehicle_year, vehicle_type, num_of_seats, mileage, transmission, fuel, num_of_bags, num_of_doors, ac, photo) values (2, 'GranTurismo', 'Maserati', 2010, 'SUV', 5, 5.84, 'Manual', 'Diesel', 4, 3, false, 'http://dummyimage.com/234x100.png/dddddd/000000');
 insert into vehicle (vehicle_id, name, brand, vehicle_year, vehicle_type, num_of_seats, mileage, transmission, fuel, num_of_bags, num_of_doors, ac, photo) values (3, 'Celica', 'Toyota', 2003, 'sedan', 9, 5.83, 'Automatic', 'Gasoline', 1, 4, false, 'http://dummyimage.com/132x100.png/dddddd/000000');
 
-insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('kpink0@telegraph.co.uk', '$2a$04$DR4YLsQrb4g1pq6RktvtUe/y/rAHNBk0XPj9KXjXO.eCigIC/YQia', '2023-6-29', 0, false, 'USER');
-insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('admin@mail.com', '$2a$10$e1jevZn0iejyBjQb0.JlAuMOI51gYq.N24DbeYXG8AfQbBm14EAc.', '2023-5-25', 0, true, 'ADMIN');
-insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('pemanuele1@census.gov', '$2a$04$mlxg4eTDJo4gZW06m6sbbOCZrBuQiL/Fm2CKaQU/g8kxLTw8aRDeu', '2022-12-30', 0, true, 'USER');
-insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('pmorrel2@multiply.com', '$2a$04$PV5CmA/M3JXrW1EYT6M6d.njtbG9iYAJxtt/oe3ZTm9ceMN88Fpb6', '2022-11-18', 0, false, 'USER');
+insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('kpink0@telegraph.co.uk', '$2a$10$e1jevZn0iejyBjQb0.JlAuMOI51gYq.N24DbeYXG8AfQbBm14EAc.', '2023-6-29', 0, false, 'USER'); /* password */
+insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('admin@mail.com', '$2a$10$e1jevZn0iejyBjQb0.JlAuMOI51gYq.N24DbeYXG8AfQbBm14EAc.', '2023-5-25', 0, true, 'ADMIN'); /* password */
+insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('pemanuele1@census.gov', '$2a$10$e1jevZn0iejyBjQb0.JlAuMOI51gYq.N24DbeYXG8AfQbBm14EAc.', '2022-12-30', 0, true, 'USER'); /* password */
+insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('pmorrel2@multiply.com', '$2a$10$e1jevZn0iejyBjQb0.JlAuMOI51gYq.N24DbeYXG8AfQbBm14EAc.', '2022-11-18', 0, false, 'USER'); /* password */
 
 insert into user_profile (user_id, first_name, last_name, phone, country, state, city, date_of_birth) values (1, 'Maddy', 'Dow', '2647003359', 'China', null, 'Cuozhou', '2022-08-13');
 insert into user_profile (user_id, first_name, last_name, phone, country, state, city, date_of_birth) values (2, 'Winni', 'GiacobbiniJacob', '9824203577', 'Indonesia', null, 'Oni', '2023-02-05');

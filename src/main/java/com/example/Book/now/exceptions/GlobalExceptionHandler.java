@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public String handleBadCredentialsException(BadCredentialsException exception){
-        return "wrong pass dude";
+        return "Invalid credentials";
     }
 
     @ExceptionHandler(UserAlreadyExistsException.class)
@@ -65,5 +65,12 @@ public class GlobalExceptionHandler {
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
         return errorMap;
+    }
+
+    @ExceptionHandler(UserDoesntExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public String handleUserDoesntExistException(UserDoesntExistsException exception){
+        return "Invalid credentials";
     }
 }
