@@ -49,11 +49,11 @@ public class GlobalExceptionHandler {
         return "Email not verified, please check your inbox";
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public String handleUserNotFoundException(UserAlreadyExistsException exception){
-        return "Invalid user";
+    public String handleResourceNotFoundException(ResourceNotFoundException exception){
+        return exception.getResourceName() + "not found.";
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -2,7 +2,7 @@ package com.example.Book.now.service;
 
 import com.example.Book.now.Entities.UserAccount;
 import com.example.Book.now.exceptions.EmailAlreadyVerifiedException;
-import com.example.Book.now.exceptions.UserNotFoundException;
+import com.example.Book.now.exceptions.ResourceNotFoundException;
 import com.example.Book.now.repository.UserAccountRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -25,7 +25,7 @@ public class VerifyMailServiceTest {
 
     @Test
     @Transactional
-    public void verifyMailTest() throws UserNotFoundException, EmailAlreadyVerifiedException {
+    public void verifyMailTest() throws ResourceNotFoundException, EmailAlreadyVerifiedException {
         Assertions.assertThrows(BadJwtException.class, () ->verifyMailService.verifyEmail("aaa"), "Token should be valid.");
         Assertions.assertThrows(EmailAlreadyVerifiedException.class, () -> verifyMailService.verifyEmail(mailJwtService.generateEmailVerificationToken("admin@mail.com")), "Account shouldn't be already verified");
         String response = verifyMailService.verifyEmail(mailJwtService.generateEmailVerificationToken("kpink0@telegraph.co.uk"));

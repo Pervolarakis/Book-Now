@@ -1,7 +1,7 @@
 package com.example.Book.now.controller;
 
 import com.example.Book.now.exceptions.EmailAlreadyVerifiedException;
-import com.example.Book.now.exceptions.UserNotFoundException;
+import com.example.Book.now.exceptions.ResourceNotFoundException;
 import com.example.Book.now.service.VerifyMailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ public class VerifyEmailController {
     private final VerifyMailService verifyMailService;
 
     @PostMapping
-    public ResponseEntity<String> verifyEmail(@RequestParam String token) throws UserNotFoundException, EmailAlreadyVerifiedException {
+    public ResponseEntity<String> verifyEmail(@RequestParam String token) throws ResourceNotFoundException, EmailAlreadyVerifiedException {
         return ResponseEntity.ok(verifyMailService.verifyEmail(token));
     }
 
