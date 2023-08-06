@@ -1,8 +1,12 @@
 package com.example.Book.now.service;
 
+import com.example.Book.now.Entities.Vehicle;
+import com.example.Book.now.RequestBodies.CreateVehicleRequestBody;
+import com.example.Book.now.RequestBodies.UpdateVehicleRequestBody;
 import com.example.Book.now.exceptions.ResourceNotFoundException;
 import com.example.Book.now.repository.VehicleRepository;
 import com.example.Book.now.responseBodies.VehicleDTO;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -55,4 +59,40 @@ public class VehicleService {
 
     }
 
+    public Integer createNewVehicle(CreateVehicleRequestBody vehicleRequestBody){
+        Vehicle vehicle = new Vehicle();
+        vehicle.setName(vehicleRequestBody.getName());
+        vehicle.setBrand(vehicleRequestBody.getBrand());
+        vehicle.setYear(vehicleRequestBody.getYear());
+        vehicle.setVehicleType(vehicleRequestBody.getVehicleType());
+        vehicle.setNumOfSeats(vehicleRequestBody.getNumOfSeats());
+        vehicle.setMileage(vehicleRequestBody.getMileage());
+        vehicle.setTransmission(vehicleRequestBody.getTransmission());
+        vehicle.setFuel(vehicleRequestBody.getFuel());
+        vehicle.setNumOfBags(vehicleRequestBody.getNumOfBags());
+        vehicle.setNumOfDoors(vehicleRequestBody.getNumOfDoors());
+        vehicle.setAc(vehicleRequestBody.getAc());
+        vehicle.setPhoto(vehicleRequestBody.getPhoto());
+        Vehicle savedVehicle = vehicleRepository.save(vehicle);
+        return savedVehicle.getVehicleId();
+    }
+
+    public Integer updateVehicleById(UpdateVehicleRequestBody updateVehicleRequestBody){
+        Vehicle vehicle = new Vehicle();
+        vehicle.setVehicleId(updateVehicleRequestBody.getId());
+        vehicle.setName(updateVehicleRequestBody.getName());
+        vehicle.setBrand(updateVehicleRequestBody.getBrand());
+        vehicle.setYear(updateVehicleRequestBody.getYear());
+        vehicle.setVehicleType(updateVehicleRequestBody.getVehicleType());
+        vehicle.setNumOfSeats(updateVehicleRequestBody.getNumOfSeats());
+        vehicle.setMileage(updateVehicleRequestBody.getMileage());
+        vehicle.setTransmission(updateVehicleRequestBody.getTransmission());
+        vehicle.setFuel(updateVehicleRequestBody.getFuel());
+        vehicle.setNumOfBags(updateVehicleRequestBody.getNumOfBags());
+        vehicle.setNumOfDoors(updateVehicleRequestBody.getNumOfDoors());
+        vehicle.setAc(updateVehicleRequestBody.getAc());
+        vehicle.setPhoto(updateVehicleRequestBody.getPhoto());
+        Vehicle savedVehicle = vehicleRepository.save(vehicle);
+        return savedVehicle.getVehicleId();
+    }
 }

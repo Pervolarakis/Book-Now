@@ -1,5 +1,6 @@
 package com.example.Book.now.config;
 
+import com.example.Book.now.Entities.RoleEnum;
 import com.example.Book.now.exceptions.UserDoesntExistsException;
 import com.example.Book.now.repository.UserAccountRepository;
 import com.nimbusds.jose.jwk.JWK;
@@ -11,6 +12,7 @@ import com.nimbusds.jose.proc.SecurityContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -47,6 +49,8 @@ public class SecurityConfiguration {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/api/v1/auth/**", "/api/v1/verify", "/error").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/vehicle", "/api/v1/vehicle/{vehicleId}").permitAll()
+                .requestMatchers("/api/v1/vehicle/**").hasAuthority("SCOPE_ROLE_ADMIN")
                 .anyRequest().authenticated()
             )
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

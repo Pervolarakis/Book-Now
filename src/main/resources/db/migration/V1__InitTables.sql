@@ -2,7 +2,7 @@ CREATE TYPE transmissionEnum AS ENUM ('Automatic', 'Manual');
 CREATE TYPE fuelEnum AS ENUM ('Gasoline', 'Diesel');
 
 create table vehicle (
-	vehicle_id integer unique,
+	vehicle_id serial,
 	name varchar(20),
 	brand varchar(20),
 	year integer,
