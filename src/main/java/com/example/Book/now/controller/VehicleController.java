@@ -8,6 +8,8 @@ import com.example.Book.now.responseBodies.VehicleDTO;
 import com.example.Book.now.service.VehicleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,24 +22,24 @@ public class VehicleController {
     private final VehicleService vehicleService;
 
     @GetMapping
-    public List<VehicleDTO> getAllVehicles(){
-        return vehicleService.findAllVehicles();
+    public ResponseEntity<List<VehicleDTO>> getAllVehicles(){
+        return ResponseEntity.ok(vehicleService.findAllVehicles());
     }
 
     @GetMapping("/{vehicleId}")
-    public VehicleDTO getVehicleById(@PathVariable Integer vehicleId) throws ResourceNotFoundException {
-        return vehicleService.findVehicleById(vehicleId);
+    public ResponseEntity<VehicleDTO> getVehicleById(@PathVariable Integer vehicleId) throws ResourceNotFoundException {
+        return ResponseEntity.ok(vehicleService.findVehicleById(vehicleId));
     }
 
     @PostMapping
-    public Integer createVehicle(@Valid @RequestBody CreateVehicleRequestBody createVehicleRequestBody) throws ResourceNotFoundException {
-        return vehicleService.createNewVehicle(createVehicleRequestBody);
+    public ResponseEntity<Integer> createVehicle(@Valid @RequestBody CreateVehicleRequestBody createVehicleRequestBody) throws ResourceNotFoundException {
+        return new ResponseEntity(vehicleService.createNewVehicle(createVehicleRequestBody), HttpStatus.CREATED);
     }
 
     @PutMapping("/{vehicleId}")
-    public Integer updateVehicleById(@PathVariable Integer vehicleId, @RequestBody UpdateVehicleRequestBody updateVehicleRequestBody) throws ResourceNotFoundException {
+    public ResponseEntity<Integer> updateVehicleById(@PathVariable Integer vehicleId, @RequestBody UpdateVehicleRequestBody updateVehicleRequestBody) throws ResourceNotFoundException {
         updateVehicleRequestBody.setId(vehicleId);
-        return vehicleService.updateVehicleById(updateVehicleRequestBody);
+        return ResponseEntity.ok(vehicleService.updateVehicleById(updateVehicleRequestBody));
     }
 
 }
