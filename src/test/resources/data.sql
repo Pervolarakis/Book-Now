@@ -117,7 +117,7 @@ insert into vehicle (name, brand, vehicle_year, vehicle_type, num_of_seats, mile
 insert into vehicle (name, brand, vehicle_year, vehicle_type, num_of_seats, mileage, transmission, fuel, num_of_bags, num_of_doors, ac, photo) values ('Celica', 'Toyota', 2003, 'sedan', 9, 5.83, 'Automatic', 'Gasoline', 1, 4, false, 'http://dummyimage.com/132x100.png/dddddd/000000');
 
 insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('kpink0@telegraph.co.uk', '$2a$10$e1jevZn0iejyBjQb0.JlAuMOI51gYq.N24DbeYXG8AfQbBm14EAc.', '2023-6-29', 0, false, 'USER'); /* password */
-insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('admin@mail.com', '$2a$10$e1jevZn0iejyBjQb0.JlAuMOI51gYq.N24DbeYXG8AfQbBm14EAc.', '2023-5-25', 0, true, 'ADMIN'); /* password */
+insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('admin@mail.com', '$2a$10$e1jevZn0iejyBjQb0.JlAuMOI51gYq.N24DbeYXG8AfQbBm14EAc.', '2023-5-25', 0, true, 'SCOPE_ROLE_ADMIN'); /* password */
 insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('pemanuele1@census.gov', '$2a$10$e1jevZn0iejyBjQb0.JlAuMOI51gYq.N24DbeYXG8AfQbBm14EAc.', '2022-12-30', 0, true, 'USER'); /* password */
 insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('pmorrel2@multiply.com', '$2a$10$e1jevZn0iejyBjQb0.JlAuMOI51gYq.N24DbeYXG8AfQbBm14EAc.', '2022-11-18', 0, false, 'USER'); /* password */
 

@@ -2,5 +2,5 @@ package com.example.Book.now.Entities;
 
 public enum RoleEnum {
     USER,
-    ROLE_ADMIN
+    SCOPE_ROLE_ADMIN
 }
