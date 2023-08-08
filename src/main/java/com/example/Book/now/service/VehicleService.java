@@ -26,7 +26,7 @@ public class VehicleService {
                         vehicle.getVehicleId(),
                         vehicle.getName(),
                         vehicle.getBrand(),
-                        vehicle.getYear(),
+                        vehicle.getVehicleYear(),
                         vehicle.getVehicleType(),
                         vehicle.getNumOfSeats(),
                         vehicle.getMileage(),
@@ -45,7 +45,7 @@ public class VehicleService {
                         vehicle.getVehicleId(),
                         vehicle.getName(),
                         vehicle.getBrand(),
-                        vehicle.getYear(),
+                        vehicle.getVehicleYear(),
                         vehicle.getVehicleType(),
                         vehicle.getNumOfSeats(),
                         vehicle.getMileage(),
@@ -63,7 +63,7 @@ public class VehicleService {
         Vehicle vehicle = new Vehicle();
         vehicle.setName(vehicleRequestBody.getName());
         vehicle.setBrand(vehicleRequestBody.getBrand());
-        vehicle.setYear(vehicleRequestBody.getYear());
+        vehicle.setVehicleYear(vehicleRequestBody.getYear());
         vehicle.setVehicleType(vehicleRequestBody.getVehicleType());
         vehicle.setNumOfSeats(vehicleRequestBody.getNumOfSeats());
         vehicle.setMileage(vehicleRequestBody.getMileage());
@@ -82,7 +82,7 @@ public class VehicleService {
         vehicle.setVehicleId(updateVehicleRequestBody.getId());
         vehicle.setName(updateVehicleRequestBody.getName());
         vehicle.setBrand(updateVehicleRequestBody.getBrand());
-        vehicle.setYear(updateVehicleRequestBody.getYear());
+        vehicle.setVehicleYear(updateVehicleRequestBody.getYear());
         vehicle.setVehicleType(updateVehicleRequestBody.getVehicleType());
         vehicle.setNumOfSeats(updateVehicleRequestBody.getNumOfSeats());
         vehicle.setMileage(updateVehicleRequestBody.getMileage());

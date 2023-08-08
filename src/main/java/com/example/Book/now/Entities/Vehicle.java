@@ -15,7 +15,7 @@ public class Vehicle {
 
     private String name;
     private String brand;
-    private Integer year;
+    private Integer vehicleYear;
     private String vehicleType;
     private Integer numOfSeats;
     private Integer mileage;

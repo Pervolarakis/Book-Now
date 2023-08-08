@@ -2,7 +2,7 @@ CREATE TYPE transmissionEnum AS ENUM ('Automatic', 'Manual');
 CREATE TYPE fuelEnum AS ENUM ('Gasoline', 'Diesel');
 
 create table vehicle (
-	vehicle_id integer unique,
+	vehicle_id integer auto_increment,
 	name varchar(20),
 	brand varchar(20),
 	vehicle_year integer,
@@ -112,9 +112,9 @@ create table review (
 	primary key(review_id)
 );
 
-insert into vehicle (vehicle_id, name, brand, vehicle_year, vehicle_type, num_of_seats, mileage, transmission, fuel, num_of_bags, num_of_doors, ac, photo) values (1, 'ZDX', 'Acura', 2011, 'coupe', 7, 7.1, 'Automatic', 'Gasoline', 2, 6, false, 'http://dummyimage.com/119x100.png/5fa2dd/ffffff');
-insert into vehicle (vehicle_id, name, brand, vehicle_year, vehicle_type, num_of_seats, mileage, transmission, fuel, num_of_bags, num_of_doors, ac, photo) values (2, 'GranTurismo', 'Maserati', 2010, 'SUV', 5, 5.84, 'Manual', 'Diesel', 4, 3, false, 'http://dummyimage.com/234x100.png/dddddd/000000');
-insert into vehicle (vehicle_id, name, brand, vehicle_year, vehicle_type, num_of_seats, mileage, transmission, fuel, num_of_bags, num_of_doors, ac, photo) values (3, 'Celica', 'Toyota', 2003, 'sedan', 9, 5.83, 'Automatic', 'Gasoline', 1, 4, false, 'http://dummyimage.com/132x100.png/dddddd/000000');
+insert into vehicle (name, brand, vehicle_year, vehicle_type, num_of_seats, mileage, transmission, fuel, num_of_bags, num_of_doors, ac, photo) values ('ZDX', 'Acura', 2011, 'coupe', 7, 7.1, 'Automatic', 'Gasoline', 2, 6, false, 'http://dummyimage.com/119x100.png/5fa2dd/ffffff');
+insert into vehicle (name, brand, vehicle_year, vehicle_type, num_of_seats, mileage, transmission, fuel, num_of_bags, num_of_doors, ac, photo) values ('GranTurismo', 'Maserati', 2010, 'SUV', 5, 5.84, 'Manual', 'Diesel', 4, 3, false, 'http://dummyimage.com/234x100.png/dddddd/000000');
+insert into vehicle (name, brand, vehicle_year, vehicle_type, num_of_seats, mileage, transmission, fuel, num_of_bags, num_of_doors, ac, photo) values ('Celica', 'Toyota', 2003, 'sedan', 9, 5.83, 'Automatic', 'Gasoline', 1, 4, false, 'http://dummyimage.com/132x100.png/dddddd/000000');
 
 insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('kpink0@telegraph.co.uk', '$2a$10$e1jevZn0iejyBjQb0.JlAuMOI51gYq.N24DbeYXG8AfQbBm14EAc.', '2023-6-29', 0, false, 'USER'); /* password */
 insert into user_account (email, password, last_login, failed_login_attempts, email_verified, role) values ('admin@mail.com', '$2a$10$e1jevZn0iejyBjQb0.JlAuMOI51gYq.N24DbeYXG8AfQbBm14EAc.', '2023-5-25', 0, true, 'ADMIN'); /* password */
