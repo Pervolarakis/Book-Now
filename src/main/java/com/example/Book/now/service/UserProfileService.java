@@ -14,12 +14,12 @@ public class UserProfileService {
     private final UserProfileRepository userProfileRepository;
 
     public UserProfile getUserProfileById(Integer profileId) throws ResourceNotFoundException {
-        return userProfileRepository.findByUserId(profileId)
+        return userProfileRepository.findByUserIdUserId(profileId)
             .orElseThrow(() -> new ResourceNotFoundException("User"));
     }
 
-    public Integer updateProfileById(Integer profileId, UpdateUserProfileRequestBody updateUserProfileRequestBody) throws ResourceNotFoundException {
-        UserProfile userProfile = userProfileRepository.findByUserId(profileId)
+    public Integer updateUserProfileById(Integer profileId, UpdateUserProfileRequestBody updateUserProfileRequestBody) throws ResourceNotFoundException {
+        UserProfile userProfile = userProfileRepository.findByUserIdUserId(profileId)
             .orElseThrow(() -> new ResourceNotFoundException("User"));
         userProfile.setFirstName(updateUserProfileRequestBody.getFirstName());
         userProfile.setLastName(updateUserProfileRequestBody.getLastName());

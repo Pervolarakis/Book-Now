@@ -10,6 +10,8 @@ import java.util.Optional;
 @Repository
 public interface UserProfileRepository extends JpaRepository<UserProfile, Integer> {
 //    List<UserProfile> findAll();
-    Optional<UserProfile> findByUserId(Integer userId);
+
+    //findBy<foreign key field name><foreign key's primary key name>
+    Optional<UserProfile> findByUserIdUserId(Integer userAccountId);
 
 }
