@@ -163,4 +163,44 @@ public class VehicleControllerTest {
             .content(mapper.writeValueAsString(vehicleRequestBody)))
             .andExpect(status().is(HttpStatus.CREATED.value()));
     }
+
+    @Test
+    @Transactional
+    public void updateVehicleUnauthenticatedTest() throws Exception {
+        mvc.perform(put("/api/v1/vehicle"))
+            .andExpect(status().is(HttpStatus.UNAUTHORIZED.value()));
+    }
+
+    @Test
+    @WithUserDetails("pemanuele1@census.gov")
+    @Transactional
+    public void updateVehicleAsUserTest() throws Exception {
+        mvc.perform(put("/api/v1/vehicle"))
+            .andExpect(status().is(HttpStatus.FORBIDDEN.value()));
+    }
+
+    @Test
+    @WithUserDetails("admin@mail.com")
+    @Transactional
+    public void updateVehicleAsAdminTest() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        CreateVehicleRequestBody vehicleRequestBody = new CreateVehicleRequestBody();
+        vehicleRequestBody.setName("test-vehicle");
+        vehicleRequestBody.setBrand("Acura");
+        vehicleRequestBody.setYear(1999);
+        vehicleRequestBody.setVehicleType("coupe");
+        vehicleRequestBody.setNumOfSeats(5);
+        vehicleRequestBody.setMileage(50000);
+        vehicleRequestBody.setNumOfBags(2);
+        vehicleRequestBody.setNumOfDoors(5);
+        vehicleRequestBody.setAc(TRUE);
+        vehicleRequestBody.setPhoto("http://dummyimage.com/119x100.png/5fa2dd/ffffff");
+        vehicleRequestBody.setTransmission(TransmissionType.Automatic);
+        vehicleRequestBody.setFuel(FuelType.Diesel);
+        mvc.perform(put("/api/v1/vehicle/1")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(mapper.writeValueAsString(vehicleRequestBody)))
+            .andExpect(status().is(HttpStatus.OK.value()));
+
+    }
 }
