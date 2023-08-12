@@ -4,6 +4,7 @@ import com.example.Book.now.Entities.UserProfile;
 import com.example.Book.now.RequestBodies.UpdateUserProfileRequestBody;
 import com.example.Book.now.exceptions.ResourceNotFoundException;
 import com.example.Book.now.repository.UserProfileRepository;
+import com.example.Book.now.responseBodies.UserProfileDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,18 @@ public class UserProfileService {
 
     private final UserProfileRepository userProfileRepository;
 
-    public UserProfile getUserProfileById(Integer profileId) throws ResourceNotFoundException {
+    public UserProfileDTO getUserProfileById(Integer profileId) throws ResourceNotFoundException {
         return userProfileRepository.findByUserIdUserId(profileId)
+                .map(userProfile ->  new UserProfileDTO(
+                        userProfile.getUserId().getUserId(),
+                        userProfile.getFirstName(),
+                        userProfile.getLastName(),
+                        userProfile.getPhone(),
+                        userProfile.getCountry(),
+                        userProfile.getState(),
+                        userProfile.getCity(),
+                        userProfile.getDateOfBirth()
+                ))
             .orElseThrow(() -> new ResourceNotFoundException("User"));
     }
 

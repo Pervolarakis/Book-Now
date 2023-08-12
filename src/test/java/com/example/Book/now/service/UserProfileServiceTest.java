@@ -3,6 +3,7 @@ package com.example.Book.now.service;
 import com.example.Book.now.Entities.UserProfile;
 import com.example.Book.now.RequestBodies.UpdateUserProfileRequestBody;
 import com.example.Book.now.exceptions.ResourceNotFoundException;
+import com.example.Book.now.responseBodies.UserProfileDTO;
 import jakarta.transaction.Transactional;
 import org.h2.command.dml.Update;
 import org.junit.jupiter.api.Assertions;
@@ -38,8 +39,8 @@ public class UserProfileServiceTest {
         updateUserProfileRequestBody.setDateOfBirth(new Date("02/12/1999"));
         Assertions.assertThrows(ResourceNotFoundException.class, ()-> userProfileService.updateUserProfileById(55, updateUserProfileRequestBody));
         Assertions.assertDoesNotThrow(() -> userProfileService.updateUserProfileById(1, updateUserProfileRequestBody));
-        UserProfile updatedProfile = userProfileService.getUserProfileById(1);
-        Assertions.assertEquals(updatedProfile.getFirstName(), "test-firstname", "First name should be updated");
+        UserProfileDTO updatedProfile = userProfileService.getUserProfileById(1);
+        Assertions.assertEquals(updatedProfile.firstName(), "test-firstname", "First name should be updated");
     }
 
 }

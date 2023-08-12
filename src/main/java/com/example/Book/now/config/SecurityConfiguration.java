@@ -48,7 +48,7 @@ public class SecurityConfiguration {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/api/v1/auth/**", "/api/v1/verify", "/error").permitAll()
+                .requestMatchers("/api/v1/auth/**", "/api/v1/verify", "/error", "/api/v1/profile/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/vehicle", "/api/v1/vehicle/{vehicleId}").permitAll()
                 .requestMatchers("/api/v1/vehicle/**").hasAuthority("SCOPE_ROLE_ADMIN")
                 .anyRequest().authenticated()
