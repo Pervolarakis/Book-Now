@@ -16,15 +16,15 @@ public class Booking {
     private Date bookingCreationDate;
     @OneToOne(fetch = FetchType.LAZY, targetEntity = Vehicle.class)
     @JoinColumn(name = "vehicle_id", referencedColumnName = "vehicleId", nullable = false)
-    private Integer vehicleId;
+    private Vehicle vehicleId;
     private Integer quantity;
     private Date pickupDate;
     private Date deliveryDate;
     @OneToOne(fetch = FetchType.LAZY, targetEntity = UserAccount.class)
     @JoinColumn(name = "user_id", referencedColumnName = "userId", nullable = false)
-    private Integer customerId;
+    private UserAccount customerId;
     @OneToOne(fetch = FetchType.LAZY, targetEntity = StoreLocation.class)
     @JoinColumn(name = "store_id", referencedColumnName = "storeId", nullable = false)
-    private Integer pickupLocationId;
+    private StoreLocation pickupLocationId;
 
 }

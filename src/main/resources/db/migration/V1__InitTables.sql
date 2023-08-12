@@ -58,7 +58,7 @@ create table inventory (
 );
 
 create table booking (
-	booking_id integer not null,
+	booking_id serial,
 	booking_creation_date date,
 	vehicle_id integer references vehicle(vehicle_id),
 	quantity integer,
