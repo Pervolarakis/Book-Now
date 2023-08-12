@@ -51,10 +51,11 @@ create table store_location (
 );
 
 create table inventory (
+    inventory_id integer auto_increment,
 	vehicle_id integer references vehicle(vehicle_id),
 	quantity integer,
 	store_id integer references store_location(store_id),
-	primary key (vehicle_id, store_id)
+	primary key (inventory_id)
 );
 
 create table booking (
