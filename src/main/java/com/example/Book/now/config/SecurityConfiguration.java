@@ -50,7 +50,8 @@ public class SecurityConfiguration {
             .authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/api/v1/auth/**", "/api/v1/verify", "/error", "/api/v1/profile/**", "/api/v1/inventory/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/vehicle", "/api/v1/vehicle/{vehicleId}").permitAll()
-                .requestMatchers("/api/v1/vehicle/**").hasAuthority("SCOPE_ROLE_ADMIN")
+                .requestMatchers("/api/v1/vehicle/**", "/api/v1/booking/location/**").hasAuthority("SCOPE_ROLE_ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/v1/booking").hasAuthority("SCOPE_ROLE_ADMIN")
                 .anyRequest().authenticated()
             )
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

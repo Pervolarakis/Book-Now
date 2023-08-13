@@ -4,6 +4,7 @@ import com.example.Book.now.Entities.StoreLocation;
 import com.example.Book.now.Entities.UserAccount;
 import com.example.Book.now.Entities.Vehicle;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class CreateBookingRequestBody {
     @NotNull(message = "Please provide a vehicle id")
     private Integer vehicleId;
     @NotNull(message = "Please provide a valid quantity")
+    @Min(value = 1, message = "Quantity should be bigger than 1")
     private Integer quantity;
     @Temporal(TemporalType.DATE)
     @NotNull
