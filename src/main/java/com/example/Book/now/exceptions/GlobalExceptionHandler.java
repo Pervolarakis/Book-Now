@@ -73,4 +73,11 @@ public class GlobalExceptionHandler {
     public String handleUserDoesntExistException(UserDoesntExistsException exception){
         return "Invalid credentials";
     }
+
+    @ExceptionHandler(NotPermittedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseBody
+    public String handleNotPermittedException(NotPermittedException exception){
+        return "You don't have access";
+    }
 }

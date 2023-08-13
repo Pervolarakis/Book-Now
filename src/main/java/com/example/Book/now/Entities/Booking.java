@@ -21,10 +21,10 @@ public class Booking {
     private Date pickupDate;
     private Date deliveryDate;
     @OneToOne(fetch = FetchType.LAZY, targetEntity = UserAccount.class)
-    @JoinColumn(name = "user_id", referencedColumnName = "userId", nullable = false)
+    @JoinColumn(name = "customer_id", referencedColumnName = "userId", nullable = false)
     private UserAccount customerId;
     @OneToOne(fetch = FetchType.LAZY, targetEntity = StoreLocation.class)
-    @JoinColumn(name = "store_id", referencedColumnName = "storeId", nullable = false)
+    @JoinColumn(name = "pickup_location_id", referencedColumnName = "storeId", nullable = false)
     private StoreLocation pickupLocationId;
 
 }
