@@ -12,6 +12,7 @@ import java.util.Date;
 public class Booking {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bookingId;
     private Date bookingCreationDate;
     @OneToOne(fetch = FetchType.LAZY, targetEntity = Vehicle.class)
