@@ -70,7 +70,7 @@ create table booking (
 );
 
 create table booking_status (
-	booking_status_id integer not null,
+	booking_status_id serial,
 	booking_id integer references booking(booking_id),
 	status_date date,
 	status varchar(40),

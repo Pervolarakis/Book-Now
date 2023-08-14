@@ -71,7 +71,7 @@ create table booking (
 );
 
 create table booking_status (
-	booking_status_id integer not null,
+	booking_status_id integer auto_increment,
 	booking_id integer references booking(booking_id),
 	status_date date,
 	status varchar(40),
@@ -151,23 +151,23 @@ insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, d
 insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-12-22', 2, 1, '2022-07-23', '2022-08-13', 2, 1);
 insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-12-14', 1, 3, '2022-08-07', '2022-08-19', 2, 2);
 
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (1, 1, '2023-06-06', 'Refunded/Completed');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (2, 2, '2023-05-27', 'Payment Confirmed');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (3, 3, '2022-07-21', 'Completed');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (4, 4, '2022-08-06', 'cancelled');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (5, 5, '2022-12-20', 'Rental Returned');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (6, 6, '2023-05-27', 'In Process');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (7, 7, '2023-02-14', 'Completed');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (8, 8, '2023-02-19', 'Rental Returned');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (9, 9, '2023-02-08', 'In Process');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (10, 10, '2023-02-16', 'Delivered');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (11, 11, '2022-11-16', 'Rental Returned');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (12, 12, '2022-11-03', 'Completed');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (13, 13, '2023-01-31', 'Delivered');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (14, 1, '2022-07-10', 'Completed');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (15, 2, '2023-04-21', 'Refunded/Completed');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (16, 2, '2022-08-06', 'cancelled');
-insert into booking_status (booking_status_id, booking_id, status_date, status) values (17, 3, '2022-12-10', 'Rental Returned');
+insert into booking_status (booking_id, status_date, status) values (1, '2023-06-06', 'Refunded/Completed');
+insert into booking_status (booking_id, status_date, status) values (2, '2023-05-27', 'Payment Confirmed');
+insert into booking_status (booking_id, status_date, status) values (3, '2022-07-21', 'Completed');
+insert into booking_status (booking_id, status_date, status) values (4, '2022-08-06', 'cancelled');
+insert into booking_status (booking_id, status_date, status) values (5, '2022-12-20', 'Rental Returned');
+insert into booking_status (booking_id, status_date, status) values (6, '2023-05-27', 'In Process');
+insert into booking_status (booking_id, status_date, status) values (7, '2023-02-14', 'Completed');
+insert into booking_status (booking_id, status_date, status) values (8, '2023-02-19', 'Rental Returned');
+insert into booking_status (booking_id, status_date, status) values (9, '2023-02-08', 'In Process');
+insert into booking_status (booking_id, status_date, status) values (10, '2023-02-16', 'Delivered');
+insert into booking_status (booking_id, status_date, status) values (11, '2022-11-16', 'Rental Returned');
+insert into booking_status (booking_id, status_date, status) values (12, '2022-11-03', 'Completed');
+insert into booking_status (booking_id, status_date, status) values (13, '2023-01-31', 'Delivered');
+insert into booking_status (booking_id, status_date, status) values (1, '2022-07-10', 'Completed');
+insert into booking_status (booking_id, status_date, status) values (2, '2023-04-21', 'Refunded/Completed');
+insert into booking_status (booking_id, status_date, status) values (2, '2022-08-06', 'cancelled');
+insert into booking_status (booking_id, status_date, status) values (3, '2022-12-10', 'Rental Returned');
 
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (1, 1, 1, '2022-08-22', '2023-09-12', 125.88);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (3, 1, 2, '2023-04-08', '2023-05-30', 143.48);

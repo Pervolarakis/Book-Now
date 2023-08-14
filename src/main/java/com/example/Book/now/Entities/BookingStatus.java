@@ -11,10 +11,11 @@ import java.util.Date;
 @Setter
 public class BookingStatus {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bookingStatusId;
     @OneToOne(fetch = FetchType.LAZY, targetEntity = Booking.class)
     @JoinColumn(name = "booking_id", referencedColumnName = "bookingId", nullable = false)
-    private Integer bookingId;
+    private Booking bookingId;
     private Date statusDate;
     private String status;
 
