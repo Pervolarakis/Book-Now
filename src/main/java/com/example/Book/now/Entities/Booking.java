@@ -19,6 +19,7 @@ public class Booking {
     @JoinColumn(name = "vehicle_id", referencedColumnName = "vehicleId", nullable = false)
     private Vehicle vehicleId;
     private Integer quantity;
+    private Float price;
     private Date pickupDate;
     private Date deliveryDate;
     @OneToOne(fetch = FetchType.LAZY, targetEntity = UserAccount.class)

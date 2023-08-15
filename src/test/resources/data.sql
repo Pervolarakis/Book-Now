@@ -61,6 +61,7 @@ create table inventory (
 create table booking (
 	booking_id integer auto_increment,
 	booking_creation_date date,
+	price float,
 	vehicle_id integer references vehicle(vehicle_id),
 	quantity integer,
 	pickup_date date,
@@ -137,19 +138,19 @@ insert into inventory (vehicle_id, quantity, store_id) values (1, 8, 2);
 insert into inventory (vehicle_id, quantity, store_id) values (2, 5, 2);
 insert into inventory (vehicle_id, quantity, store_id) values (3, 4, 2);
 
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-11-23', 1, 2, '2022-07-15', '2022-08-11', 1, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-04-13', 2, 2, '2022-07-09', '2022-08-14', 2, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-08-20', 3, 1, '2022-07-15', '2022-08-24', 3, 2);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-03-20', 1, 3, '2022-07-17', '2022-08-11', 4, 2);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-01-20', 2, 2, '2022-07-28', '2022-08-16', 4, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-03-23', 3, 1, '2022-08-08', '2022-08-25', 1, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-05-22', 1, 2, '2022-08-09', '2022-08-16', 1, 2);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-12-18', 1, 2, '2022-07-23', '2022-08-13', 2, 2);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-10-30', 2, 2, '2022-07-18', '2022-08-20', 3, 2);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-04-08', 3, 3, '2022-08-08', '2022-08-13', 3, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-04-29', 3, 1, '2022-08-08', '2022-08-23', 2, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-12-22', 2, 1, '2022-07-23', '2022-08-13', 2, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-12-14', 1, 3, '2022-08-07', '2022-08-19', 2, 2);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2022-11-23', 1, 2, '2022-07-15', '2022-08-11', 1, 1, 55.63);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-04-13', 2, 2, '2022-07-09', '2022-08-14', 2, 1, 103.20);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2022-08-20', 3, 1, '2022-07-15', '2022-08-24', 3, 2, 98.00);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-03-20', 1, 3, '2022-07-17', '2022-08-11', 4, 2, 400.23);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-01-20', 2, 2, '2022-07-28', '2022-08-16', 4, 1, 543.12);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-03-23', 3, 1, '2022-08-08', '2022-08-25', 1, 1, 103.22);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-05-22', 1, 2, '2022-08-09', '2022-08-16', 1, 2, 99.12);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2022-12-18', 1, 2, '2022-07-23', '2022-08-13', 2, 2, 194.65);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2022-10-30', 2, 2, '2022-07-18', '2022-08-20', 3, 2, 340.33);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-04-08', 3, 3, '2022-08-08', '2022-08-13', 3, 1, 182.12);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-04-29', 3, 1, '2022-08-08', '2022-08-23', 2, 1, 56.33);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2022-12-22', 2, 1, '2022-07-23', '2022-08-13', 2, 1, 190.00);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2022-12-14', 1, 3, '2022-08-07', '2022-08-19', 2, 2, 139.12);
 
 insert into booking_status (booking_id, status_date, status) values (1, '2023-06-06', 'Refunded/Completed');
 insert into booking_status (booking_id, status_date, status) values (2, '2023-05-27', 'Payment Confirmed');

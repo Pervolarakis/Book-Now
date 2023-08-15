@@ -63,6 +63,7 @@ create table booking (
 	vehicle_id integer references vehicle(vehicle_id),
 	quantity integer,
 	pickup_date date,
+	price float,
 	delivery_date date,
 	customer_id integer references user_profile(user_id),
 	pickup_location_id integer references store_location(store_id),

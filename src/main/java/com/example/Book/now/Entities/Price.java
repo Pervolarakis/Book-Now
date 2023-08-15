@@ -15,10 +15,10 @@ public class Price {
     private Integer priceId;
     @OneToOne(fetch = FetchType.LAZY, targetEntity = Vehicle.class)
     @JoinColumn(name = "vehicle_id", referencedColumnName = "vehicleId", nullable = false)
-    private Integer vehicleId;
+    private Vehicle vehicleId;
     @OneToOne(fetch = FetchType.LAZY, targetEntity = StoreLocation.class)
     @JoinColumn(name = "store_id", referencedColumnName = "storeId", nullable = false)
-    private Integer storeId;
+    private StoreLocation storeId;
     private Date fromDate;
     private Date toDate;
     private Float price;
