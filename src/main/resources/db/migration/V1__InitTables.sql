@@ -40,7 +40,7 @@ create table user_profile(
 );
 
 create table store_location (
-	store_id integer unique,
+	store_id serial,
 	store_name text,
 	country varchar(80),
 	state varchar(80),

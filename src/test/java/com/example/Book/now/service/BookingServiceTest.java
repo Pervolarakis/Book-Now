@@ -26,10 +26,10 @@ public class BookingServiceTest {
 
     @Test
     @Transactional
-    public void getBookingByIdTest(){
+    public void getBookingByIdTest() throws NotPermittedException, ResourceNotFoundException {
         Assertions.assertThrows(NotPermittedException.class, () -> bookingService.getBookingById(1, "pemanuele1@census.gov"), "Successfully block random users from getting booking they dont own");
-        Assertions.assertDoesNotThrow(() -> bookingService.getBookingById(1, "kpink0@telegraph.co.uk"), "Successfully returns if user owns booking");
-        Assertions.assertDoesNotThrow(() -> bookingService.getBookingById(1, "admin@mail.com"), "Successfully returns if user is admin");
+        Assertions.assertNotNull(bookingService.getBookingById(1, "kpink0@telegraph.co.uk"), "Successfully returns if user owns booking");
+        Assertions.assertNotNull(bookingService.getBookingById(1, "admin@mail.com"), "Successfully returns if user is admin");
         Assertions.assertThrows(UserDoesntExistsException.class, () -> bookingService.getBookingById(1, "aaa@mail.com"), "Fails if user doesnt exist");
         Assertions.assertThrows(ResourceNotFoundException.class, () -> bookingService.getBookingById(55, "admin@mail.com"), "Throws if booking doesnt exist");
     }
@@ -37,7 +37,7 @@ public class BookingServiceTest {
     @Test
     @Transactional
     public void getBookingsByLocationIdTest(){
-        Assertions.assertDoesNotThrow(() -> bookingService.getBookingsByLocationId(55), "Successfully returns bookings");
+        Assertions.assertNotNull(bookingService.getBookingsByLocationId(55), "Successfully returns bookings");
         List<BookingDTO> bookings = bookingService.getBookingsByLocationId(1);
         Assertions.assertEquals(bookings.size(), 7, "Successfully returns all bookings for location");
     }

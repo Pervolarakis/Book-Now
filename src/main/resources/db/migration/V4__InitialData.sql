@@ -2021,16 +2021,16 @@ insert into user_profile (user_id, first_name, last_name, phone, country, state,
 insert into user_profile (user_id, first_name, last_name, phone, country, state, city, date_of_birth) values (999, 'Bill', 'Eate', '9896453451', 'Democratic Republic of the Congo', null, 'Yangambi', '2022-10-18 08:01:09');
 insert into user_profile (user_id, first_name, last_name, phone, country, state, city, date_of_birth) values (1000, 'Tynan', 'Orwin', '4527353664', 'Vietnam', null, 'Di Linh', '2022-11-10 15:48:48');
 
-insert into store_location (store_id, store_name, country, state, city, full_address) values (1, 'Diqing Airport', 'Cuba', null, 'Palma Soriano', '884 Kipling Plaza');
-insert into store_location (store_id, store_name, country, state, city, full_address) values (2, 'Karumba Airport', 'Japan', null, 'Miyako', '2 Jackson Pass');
-insert into store_location (store_id, store_name, country, state, city, full_address) values (3, 'Termal Airport', 'Czech Republic', null, 'Libochovice', '3 Miller Avenue');
-insert into store_location (store_id, store_name, country, state, city, full_address) values (4, 'Northeast Iowa Regional Airport', 'Czech Republic', null, 'Chrást', '523 Leroy Plaza');
-insert into store_location (store_id, store_name, country, state, city, full_address) values (5, 'Snake Bay Airport', 'Poland', null, 'Sarnów', '5674 Blue Bill Park Court');
-insert into store_location (store_id, store_name, country, state, city, full_address) values (6, 'Xichang Qingshan Airport', 'Japan', null, 'Saitama', '3 Monument Parkway');
-insert into store_location (store_id, store_name, country, state, city, full_address) values (7, 'Malekolon Airport', 'Greece', null, 'Kokkónion', '71475 Drewry Terrace');
-insert into store_location (store_id, store_name, country, state, city, full_address) values (8, 'Seinäjoki Airport', 'Poland', null, 'Ostrowite', '1269 Doe Crossing Lane');
-insert into store_location (store_id, store_name, country, state, city, full_address) values (9, 'Sardeh Band Airport', 'Greece', null, 'Makrochóri', '68329 Longview Way');
-insert into store_location (store_id, store_name, country, state, city, full_address) values (10, 'Kagoshima Airport', 'Germany', 'Sachsen', 'Leipzig', '15 Maywood Plaza');
+insert into store_location (store_name, country, state, city, full_address) values ('Diqing Airport', 'Cuba', null, 'Palma Soriano', '884 Kipling Plaza');
+insert into store_location (store_name, country, state, city, full_address) values ('Karumba Airport', 'Japan', null, 'Miyako', '2 Jackson Pass');
+insert into store_location (store_name, country, state, city, full_address) values ('Termal Airport', 'Czech Republic', null, 'Libochovice', '3 Miller Avenue');
+insert into store_location (store_name, country, state, city, full_address) values ('Northeast Iowa Regional Airport', 'Czech Republic', null, 'Chrást', '523 Leroy Plaza');
+insert into store_location (store_name, country, state, city, full_address) values ('Snake Bay Airport', 'Poland', null, 'Sarnów', '5674 Blue Bill Park Court');
+insert into store_location (store_name, country, state, city, full_address) values ('Xichang Qingshan Airport', 'Japan', null, 'Saitama', '3 Monument Parkway');
+insert into store_location (store_name, country, state, city, full_address) values ('Malekolon Airport', 'Greece', null, 'Kokkónion', '71475 Drewry Terrace');
+insert into store_location (store_name, country, state, city, full_address) values ('Seinäjoki Airport', 'Poland', null, 'Ostrowite', '1269 Doe Crossing Lane');
+insert into store_location (store_name, country, state, city, full_address) values ('Sardeh Band Airport', 'Greece', null, 'Makrochóri', '68329 Longview Way');
+insert into store_location (store_name, country, state, city, full_address) values ('Kagoshima Airport', 'Germany', 'Sachsen', 'Leipzig', '15 Maywood Plaza');
 
 insert into inventory (vehicle_id, quantity, store_id) values (17, 2, 9);
 insert into inventory (vehicle_id, quantity, store_id) values (14, 0, 2);

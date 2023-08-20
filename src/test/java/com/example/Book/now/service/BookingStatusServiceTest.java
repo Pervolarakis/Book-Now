@@ -25,8 +25,8 @@ public class BookingStatusServiceTest {
         List<BookingStatusDTO> listBooking = bookingStatusService.getBookingStatusByBookingId(55, "admin@mail.com");
         Assertions.assertEquals(listBooking.size(), 0);
         Assertions.assertThrows(NotPermittedException.class, () -> bookingStatusService.getBookingStatusByBookingId(1, "pemanuele1@census.gov"), "Throws if user doesnt own the booking or isnt admin");
-        Assertions.assertDoesNotThrow(() -> bookingStatusService.getBookingStatusByBookingId(1, "kpink0@telegraph.co.uk"), "Doesnt throw if user owns the booking");
-        Assertions.assertDoesNotThrow(() -> bookingStatusService.getBookingStatusByBookingId(1, "admin@mail.com"), "Doesnt throw if user is admin");
+        Assertions.assertNotNull(bookingStatusService.getBookingStatusByBookingId(1, "kpink0@telegraph.co.uk"), "Doesnt throw if user owns the booking");
+        Assertions.assertNotNull(bookingStatusService.getBookingStatusByBookingId(1, "admin@mail.com"), "Doesnt throw if user is admin");
         List<BookingStatusDTO> bookingStatusList = bookingStatusService.getBookingStatusByBookingId(1, "kpink0@telegraph.co.uk");
         Assertions.assertEquals(bookingStatusList.size(), 2, "Successfully returns all bookings status");
     }

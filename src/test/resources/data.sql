@@ -41,7 +41,7 @@ create table user_profile(
 );
 
 create table store_location (
-	store_id integer unique,
+	store_id integer auto_increment,
 	store_name text,
 	country varchar(80),
 	state varchar(80),
@@ -128,8 +128,8 @@ insert into user_profile (user_id, first_name, last_name, phone, country, state,
 insert into user_profile (user_id, first_name, last_name, phone, country, state, city, date_of_birth) values (3, 'Zenia', 'Landreth', '7846473051', 'Yemen', null, 'Dhī as Sufāl', '2022-08-07');
 insert into user_profile (user_id, first_name, last_name, phone, country, state, city, date_of_birth) values (4, 'Liv', 'Thunderman', '3404011720', 'Russia', null, 'Luga', '2023-07-02');
 
-insert into store_location (store_id, store_name, country, state, city, full_address) values (1, 'Diqing Airport', 'Cuba', null, 'Palma Soriano', '884 Kipling Plaza');
-insert into store_location (store_id, store_name, country, state, city, full_address) values (2, 'Karumba Airport', 'Japan', null, 'Miyako', '2 Jackson Pass');
+insert into store_location (store_name, country, state, city, full_address) values ('Diqing Airport', 'Cuba', null, 'Palma Soriano', '884 Kipling Plaza');
+insert into store_location (store_name, country, state, city, full_address) values ('Karumba Airport', 'Japan', null, 'Miyako', '2 Jackson Pass');
 
 insert into inventory (vehicle_id, quantity, store_id) values (1, 2, 1);
 insert into inventory (vehicle_id, quantity, store_id) values (2, 0, 1);
