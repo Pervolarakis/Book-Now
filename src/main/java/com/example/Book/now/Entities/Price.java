@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,8 +20,8 @@ public class Price {
     @OneToOne(fetch = FetchType.LAZY, targetEntity = StoreLocation.class)
     @JoinColumn(name = "store_id", referencedColumnName = "storeId", nullable = false)
     private StoreLocation storeId;
-    private Date fromDate;
-    private Date toDate;
+    private LocalDate fromDate;
+    private LocalDate toDate;
     private Float price;
 
 }

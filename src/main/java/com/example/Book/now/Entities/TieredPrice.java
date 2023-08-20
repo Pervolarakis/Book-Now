@@ -8,7 +8,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class TieredPricing {
+public class TieredPrice {
 
     @Id
     private Integer tieredPriceId;

@@ -170,10 +170,10 @@ insert into booking_status (booking_id, status_date, status) values (2, '2023-04
 insert into booking_status (booking_id, status_date, status) values (2, '2022-08-06', 'cancelled');
 insert into booking_status (booking_id, status_date, status) values (3, '2022-12-10', 'Rental Returned');
 
-insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (1, 1, 1, '2022-08-22', '2023-09-12', 125.88);
+insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (1, 1, 1, '2022-08-22', '2023-01-22', 125.88);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (3, 1, 2, '2023-04-08', '2023-05-30', 143.48);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (2, 3, 2, '2022-02-20', '2022-08-21', 125.97);
-insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (4, 1, 1, '2023-01-23', '2022-10-30', 120.03);
+insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (4, 1, 1, '2023-01-23', '2023-10-30', 120.03);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (5, 1, 2, '2023-12-30', '2023-03-26', 192.32);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (6, 3, 2, '2023-01-28', '2023-03-12', 22.07);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (7, 2, 1, '2023-03-18', '2023-04-28', 157.68);

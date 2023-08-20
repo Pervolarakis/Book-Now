@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
@@ -19,11 +20,8 @@ public class PriceRepositoryTest {
     @Test
     @Transactional
     public void findVehiclePriceTest(){
-        Assertions.assertDoesNotThrow(() -> priceRepository.findByVehicleIdVehicleIdAndStoreIdStoreIdAndFromDateLessThanEqualAndToDateGreaterThanEqual(1,1,new Date("08/25/2022"), new Date("08/25/2022")));
-        Optional<Price> price = priceRepository.findByVehicleIdVehicleIdAndStoreIdStoreIdAndFromDateLessThanEqualAndToDateGreaterThanEqual(1,1,new Date("08/25/2022"), new Date("08/25/2022"));
-        System.out.println(price.get().getPrice());
-//        Price price = priceRepository.findByVehicleIdVehicleIdAndStoreIdStoreIdAndFromDateLessThanEqualAndToDateGreaterThanEqual(1,1,new Date("25/08/2022"), new Date("25/08/2022"))
-//                .orElseThrow(() -> new RuntimeException("AAA"));
-//        System.out.println(price);
+        Assertions.assertDoesNotThrow(() -> priceRepository.findByVehicleIdVehicleIdAndStoreIdStoreIdAndFromDateLessThanEqualAndToDateGreaterThanEqual(1,1, LocalDate.parse("2022-08-25"),  LocalDate.parse("2022-08-25")));
+        Float price = priceRepository.findByVehicleIdVehicleIdAndStoreIdStoreIdAndFromDateLessThanEqualAndToDateGreaterThanEqual(1,1, LocalDate.parse("2022-08-25"),  LocalDate.parse("2022-08-25")).get().getPrice();
+        Assertions.assertEquals(price.floatValue(), 125.88f, "Successfully returns price");
     }
 }
