@@ -4,6 +4,7 @@ import com.example.Book.now.RequestBodies.CreateBookingRequestBody;
 import com.example.Book.now.RequestBodies.UpdateBookingRequestBody;
 import com.example.Book.now.exceptions.NotPermittedException;
 import com.example.Book.now.exceptions.ResourceNotFoundException;
+import com.example.Book.now.exceptions.VehicleNotAvailableException;
 import com.example.Book.now.responseBodies.BookingDTO;
 import com.example.Book.now.service.BookingService;
 import jakarta.validation.Valid;
@@ -43,12 +44,12 @@ public class BookingController {
     }
 
     @PostMapping
-    public ResponseEntity<Integer> createBooking(@Valid @RequestBody CreateBookingRequestBody createBookingRequestBody, Authentication authentication) throws ResourceNotFoundException {
+    public ResponseEntity<Integer> createBooking(@Valid @RequestBody CreateBookingRequestBody createBookingRequestBody, Authentication authentication) throws ResourceNotFoundException, VehicleNotAvailableException {
         return new ResponseEntity(bookingService.createBooking(createBookingRequestBody, authentication.getName()), HttpStatus.CREATED);
     }
 
     @PutMapping("/{bookingId}")
-    public ResponseEntity<Integer> updateBooking(@PathVariable Integer bookingId, @RequestBody UpdateBookingRequestBody updateBookingRequestBody, Authentication authentication) throws NotPermittedException, ResourceNotFoundException {
+    public ResponseEntity<Integer> updateBooking(@PathVariable Integer bookingId, @RequestBody UpdateBookingRequestBody updateBookingRequestBody, Authentication authentication) throws NotPermittedException, ResourceNotFoundException, VehicleNotAvailableException {
         return ResponseEntity.ok(bookingService.updateBookingById(updateBookingRequestBody, bookingId, authentication.getName()));
     }
 }

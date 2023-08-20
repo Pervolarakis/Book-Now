@@ -7,6 +7,7 @@ import com.example.Book.now.RequestBodies.UpdateBookingRequestBody;
 import com.example.Book.now.exceptions.NotPermittedException;
 import com.example.Book.now.exceptions.ResourceNotFoundException;
 import com.example.Book.now.exceptions.UserDoesntExistsException;
+import com.example.Book.now.exceptions.VehicleNotAvailableException;
 import com.example.Book.now.repository.BookingRepository;
 import com.example.Book.now.repository.StoreLocationRepository;
 import com.example.Book.now.repository.UserAccountRepository;
@@ -29,6 +30,7 @@ public class BookingService {
     private final UserAccountRepository userAccountRepository;
     private final VehicleRepository vehicleRepository;
     private final StoreLocationRepository storeLocationRepository;
+    private final BookingPriceService bookingPriceService;
 
     public BookingDTO getBookingById(Integer bookingId, String userMail) throws ResourceNotFoundException, NotPermittedException {
         UserAccount userAccount = userAccountRepository.findUserAccountByEmailIgnoreCase(userMail)
@@ -56,7 +58,8 @@ public class BookingService {
                     bookingItem.getPickupDate(),
                     bookingItem.getDeliveryDate(),
                     bookingItem.getCustomerId().getUserId(),
-                    bookingItem.getPickupLocationId().getStoreId()
+                    bookingItem.getPickupLocationId().getStoreId(),
+                    bookingItem.getPrice()
             ))
         .orElseThrow(() -> new ResourceNotFoundException("Booking"));
         if (!userAccount.getRole().equals(RoleEnum.SCOPE_ROLE_ADMIN)&&!userAccount.getUserId().equals(booking.customerId())){
@@ -89,7 +92,8 @@ public class BookingService {
                 booking.getPickupDate(),
                 booking.getDeliveryDate(),
                 booking.getCustomerId().getUserId(),
-                booking.getPickupLocationId().getStoreId()
+                booking.getPickupLocationId().getStoreId(),
+                booking.getPrice()
             )).collect(Collectors.toList());
     }
 
@@ -122,7 +126,8 @@ public class BookingService {
                 booking.getPickupDate(),
                 booking.getDeliveryDate(),
                 booking.getCustomerId().getUserId(),
-                booking.getPickupLocationId().getStoreId()
+                booking.getPickupLocationId().getStoreId(),
+                booking.getPrice()
             )).collect(Collectors.toList());
     }
 
@@ -150,11 +155,12 @@ public class BookingService {
                 booking.getPickupDate(),
                 booking.getDeliveryDate(),
                 booking.getCustomerId().getUserId(),
-                booking.getPickupLocationId().getStoreId()
+                booking.getPickupLocationId().getStoreId(),
+                booking.getPrice()
             )).collect(Collectors.toList());
     }
 
-    public Integer createBooking(CreateBookingRequestBody createBookingRequestBody, String userEmail) throws ResourceNotFoundException {
+    public Integer createBooking(CreateBookingRequestBody createBookingRequestBody, String userEmail) throws ResourceNotFoundException, VehicleNotAvailableException {
         Booking booking = new Booking();
         UserAccount userAccount = userAccountRepository.findUserAccountByEmailIgnoreCase(userEmail)
             .orElseThrow(()-> new ResourceNotFoundException("User"));
@@ -169,11 +175,19 @@ public class BookingService {
         StoreLocation storeLocation = storeLocationRepository.findById(createBookingRequestBody.getPickupLocationId())
             .orElseThrow(()-> new ResourceNotFoundException("Location"));
         booking.setPickupLocationId(storeLocation);
+        String coupon = createBookingRequestBody.getCoupon()!=null ? createBookingRequestBody.getCoupon() : "";
+        booking.setPrice(bookingPriceService.calculateBookingCost(
+                createBookingRequestBody.getVehicleId(),
+                createBookingRequestBody.getPickupLocationId(),
+                createBookingRequestBody.getPickupDate(),
+                createBookingRequestBody.getDeliveryDate(),
+                coupon
+        ).totalPriceAfterDiscount());
         Booking savedBooking = bookingRepository.save(booking);
         return savedBooking.getBookingId();
     }
 
-    public Integer updateBookingById(UpdateBookingRequestBody updateBookingRequestBody, Integer bookingId, String userMail) throws ResourceNotFoundException, NotPermittedException {
+    public Integer updateBookingById(UpdateBookingRequestBody updateBookingRequestBody, Integer bookingId, String userMail) throws ResourceNotFoundException, NotPermittedException, VehicleNotAvailableException {
         Booking booking = bookingRepository.findById(bookingId)
             .orElseThrow(() -> new ResourceNotFoundException("Booking"));
         UserAccount userAccount = userAccountRepository.findUserAccountByEmailIgnoreCase(userMail)
@@ -191,6 +205,13 @@ public class BookingService {
             .orElseThrow(()-> new ResourceNotFoundException("Location"));
         booking.setPickupLocationId(storeLocation);
         bookingRepository.save(booking);
+        booking.setPrice(bookingPriceService.calculateBookingCost(
+                updateBookingRequestBody.getVehicleId(),
+                updateBookingRequestBody.getPickupLocationId(),
+                updateBookingRequestBody.getPickupDate(),
+                updateBookingRequestBody.getDeliveryDate(),
+                ""
+        ).totalPriceAfterDiscount());
         return booking.getBookingId();
     }
 }

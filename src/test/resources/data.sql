@@ -178,7 +178,7 @@ insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) va
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (6, 3, 2, '2023-01-28', '2023-03-12', 22.07);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (7, 2, 1, '2023-03-18', '2023-04-28', 157.68);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (8, 3, 2, '2023-02-21', '2023-09-09', 194.42);
-insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (9, 1, 2, '2022-11-19', '2023-01-12', 176.43);
+insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (9, 1, 2, '2023-10-01', '2023-11-12', 176.43);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (10, 2, 1, '2023-05-14', '2023-08-21', 48.84);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (11, 3, 2, '2022-01-21', '2022-10-01', 160.73);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (12, 2, 1, '2022-04-03', '2022-08-26', 99.52);
