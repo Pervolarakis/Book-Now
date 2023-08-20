@@ -1,5 +1,8 @@
 package com.example.Book.now.service;
 
+import com.example.Book.now.Entities.StoreLocation;
+import com.example.Book.now.RequestBodies.CreateStoreLocationRequestBody;
+import com.example.Book.now.RequestBodies.UpdateStoreLocationRequestBody;
 import com.example.Book.now.exceptions.ResourceNotFoundException;
 import com.example.Book.now.repository.StoreLocationRepository;
 import com.example.Book.now.responseBodies.StoreLocationDTO;
@@ -41,6 +44,27 @@ public class StoreLocationService {
         ).collect(Collectors.toList());
     }
 
-//    public Integer
+    public Integer createStoreLocation (CreateStoreLocationRequestBody createStoreLocationRequestBody){
+        StoreLocation storeLocation = new StoreLocation();
+        storeLocation.setStoreName(createStoreLocationRequestBody.getStoreName());
+        storeLocation.setCity(createStoreLocationRequestBody.getCity());
+        storeLocation.setCountry(createStoreLocationRequestBody.getCountry());
+        storeLocation.setState(createStoreLocationRequestBody.getState());
+        storeLocation.setFullAddress(createStoreLocationRequestBody.getFullAddress());
+        StoreLocation savedStoreLocation = storeLocationRepository.save(storeLocation);
+        return savedStoreLocation.getStoreId();
+    }
+
+    public Integer updateStoreLocation(UpdateStoreLocationRequestBody updateStoreLocationRequestBody, Integer storeLocationId) throws ResourceNotFoundException {
+        StoreLocation storeLocation = storeLocationRepository.findById(storeLocationId)
+            .orElseThrow(() -> new ResourceNotFoundException("Store Location"));
+        storeLocation.setFullAddress(updateStoreLocationRequestBody.getFullAddress());
+        storeLocation.setStoreName(updateStoreLocationRequestBody.getStoreName());
+        storeLocation.setCity(updateStoreLocationRequestBody.getCity());
+        storeLocation.setCountry(updateStoreLocationRequestBody.getCountry());
+        storeLocation.setState(updateStoreLocationRequestBody.getState());
+        StoreLocation savedStoreLocation = storeLocationRepository.save(storeLocation);
+        return savedStoreLocation.getStoreId();
+    }
 
 }
