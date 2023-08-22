@@ -62,10 +62,39 @@ public class StoreLocationControllerTest {
     public void createStoreLocationTestAsAdmin() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         CreateStoreLocationRequestBody requestBody = new CreateStoreLocationRequestBody();
-        requestBody.setStoreName("test-store-location");
+        requestBody.setStoreName(null);
         requestBody.setCity("test-city");
         requestBody.setCountry("test-country");
         requestBody.setState("test-state");
+        requestBody.setFullAddress("test full address");
+        mvc.perform(post("/api/v1/location")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(mapper.writeValueAsString(requestBody)))
+            .andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
+        requestBody.setStoreName("test-store-location");
+        requestBody.setCity(null);
+        mvc.perform(post("/api/v1/location")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(mapper.writeValueAsString(requestBody)))
+            .andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
+        requestBody.setCity("test-city");
+        requestBody.setCountry(null);
+        mvc.perform(post("/api/v1/location")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(mapper.writeValueAsString(requestBody)))
+            .andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
+        requestBody.setCountry("test-country");
+        requestBody.setState(null);
+        mvc.perform(post("/api/v1/location")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(mapper.writeValueAsString(requestBody)))
+            .andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
+        requestBody.setState("test-state");
+        requestBody.setFullAddress(null);
+        mvc.perform(post("/api/v1/location")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(mapper.writeValueAsString(requestBody)))
+            .andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
         requestBody.setFullAddress("test full address");
         mvc.perform(post("/api/v1/location")
             .contentType(MediaType.APPLICATION_JSON)
