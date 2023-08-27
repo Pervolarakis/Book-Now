@@ -12,13 +12,14 @@ import java.util.Date;
 public class Review {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer reviewId;
     @OneToOne(fetch = FetchType.LAZY, targetEntity = Booking.class)
     @JoinColumn(name = "booking_id", referencedColumnName = "bookingId", nullable = false)
-    private Integer bookingId;
-    @OneToOne(fetch = FetchType.LAZY, targetEntity = UserAccount.class)
-    @JoinColumn(name = "user_id", referencedColumnName = "userId", nullable = false)
-    private Integer userId;
+    private Booking bookingId;
+    @OneToOne(fetch = FetchType.LAZY, targetEntity = UserProfile.class)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    private UserProfile userId;
     private Date reviewCreatedAt;
     private Integer rating;
     private String reviewText;

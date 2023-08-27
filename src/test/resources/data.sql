@@ -106,9 +106,9 @@ create table tiered_price (
 );
 
 create table review (
-	review_id integer not null,
+	review_id integer auto_increment,
 	booking_id integer references booking(booking_id),
-	user_id integer references user_account(user_id),
+	user_id integer references user_profile(user_id),
 	review_created_at date,
 	rating integer,
 	review_text text,
@@ -192,12 +192,12 @@ insert into tiered_price (duration_in_days, discount_percentage, is_active) valu
 insert into tiered_price (duration_in_days, discount_percentage, is_active) values (20, 10, true);
 insert into tiered_price (duration_in_days, discount_percentage, is_active) values (30, 13, true);
 
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (1, 1, 1, '2022-12-28', 1, 'Great car!');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (2, 2, 2, '2022-11-03', 1, 'Smooth ride.');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (3, 3, 3, '2022-12-21', 1, 'Poor fuel efficiency.');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (4, 4, 4, '2022-12-06', 2, 'Great car!');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (5, 5, 4, '2022-11-19', 4, 'Terrible experience.');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (6, 6, 1, '2023-04-29', 4, 'Comfortable interior.');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (7, 7, 1, '2023-03-30', 5, 'Comfortable interior.');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (8, 8, 2, '2023-01-21', 5, 'Smooth ride.');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (9, 9, 3, '2023-04-17', 1, 'Smooth ride.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (1, 1, '2022-12-28', 1, 'Great car!');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (2, 2, '2022-11-03', 1, 'Smooth ride.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (3, 3, '2022-12-21', 1, 'Poor fuel efficiency.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (4, 4, '2022-12-06', 2, 'Great car!');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (5, 4, '2022-11-19', 4, 'Terrible experience.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (6, 1, '2023-04-29', 4, 'Comfortable interior.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (7, 1, '2023-03-30', 5, 'Comfortable interior.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (8, 2, '2023-01-21', 5, 'Smooth ride.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (9, 3, '2023-04-17', 1, 'Smooth ride.');

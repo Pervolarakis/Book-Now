@@ -105,9 +105,9 @@ create table tiered_price (
 );
 
 create table review (
-	review_id integer not null,
+	review_id serial,
 	booking_id integer references booking(booking_id),
-	user_id integer references user_account(user_id),
+	user_id integer references user_profile(user_id),
 	review_created_at date,
 	rating integer,
 	review_text text,
