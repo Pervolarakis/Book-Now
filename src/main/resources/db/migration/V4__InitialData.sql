@@ -5119,11 +5119,11 @@ insert into coupon (coupon_id, discount_percentage, expires_at, expired) values 
 insert into coupon (coupon_id, discount_percentage, expires_at, expired) values ('OHP6YBY3', 7, '2022-12-02 03:13:45', false);
 insert into coupon (coupon_id, discount_percentage, expires_at, expired) values ('L26CW5EA', 12, '2023-03-16 21:24:42', false);
 
-insert into tiered_price (tiered_price_id, duration_in_days, discount_percentage) values (1, 10, 8);
-insert into tiered_price (tiered_price_id, duration_in_days, discount_percentage) values (2, 20, 10);
-insert into tiered_price (tiered_price_id, duration_in_days, discount_percentage) values (3, 30, 13);
-insert into tiered_price (tiered_price_id, duration_in_days, discount_percentage) values (4, 180, 20);
-insert into tiered_price (tiered_price_id, duration_in_days, discount_percentage) values (5, 360, 25);
+insert into tiered_price (duration_in_days, discount_percentage, is_active) values (10, 8, true);
+insert into tiered_price (duration_in_days, discount_percentage, is_active) values (20, 10, true);
+insert into tiered_price (duration_in_days, discount_percentage, is_active) values (30, 13, false);
+insert into tiered_price (duration_in_days, discount_percentage, is_active) values (180, 20, true);
+insert into tiered_price (duration_in_days, discount_percentage, is_active) values (360, 25, false);
 
 insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (1, 726, 648, '2022-12-28 14:08:09', 1, 'Great car!');
 insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (2, 195, 571, '2022-11-03 14:02:49', 1, 'Smooth ride.');

@@ -98,9 +98,10 @@ create table coupon (
 );
 
 create table tiered_price (
-	tiered_price_id integer not null,
+	tiered_price_id integer auto_increment,
 	duration_in_days integer,
 	discount_percentage float,
+	is_active boolean,
 	primary key(tiered_price_id)
 );
 
@@ -187,9 +188,9 @@ insert into coupon (coupon_id, discount_percentage, expires_at, expired) values 
 insert into coupon (coupon_id, discount_percentage, expires_at, expired) values ('715M8J6J', 10, '2023-03-23', false);
 
 
-insert into tiered_price (tiered_price_id, duration_in_days, discount_percentage) values (1, 10, 8);
-insert into tiered_price (tiered_price_id, duration_in_days, discount_percentage) values (2, 20, 10);
-insert into tiered_price (tiered_price_id, duration_in_days, discount_percentage) values (3, 30, 13);
+insert into tiered_price (duration_in_days, discount_percentage, is_active) values (10, 8, true);
+insert into tiered_price (duration_in_days, discount_percentage, is_active) values (20, 10, true);
+insert into tiered_price (duration_in_days, discount_percentage, is_active) values (30, 13, true);
 
 insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (1, 1, 1, '2022-12-28', 1, 'Great car!');
 insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (2, 2, 2, '2022-11-03', 1, 'Smooth ride.');

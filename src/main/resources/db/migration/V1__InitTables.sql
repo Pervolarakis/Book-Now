@@ -97,9 +97,10 @@ create table coupon (
 );
 
 create table tiered_price (
-	tiered_price_id integer not null,
+	tiered_price_id serial,
 	duration_in_days integer,
 	discount_percentage float,
+	is_active boolean,
 	primary key(tiered_price_id)
 );
 
