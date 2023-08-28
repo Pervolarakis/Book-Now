@@ -1,5 +1,6 @@
 package com.example.Book.now.service;
 
+import com.example.Book.now.Entities.Coupon;
 import com.example.Book.now.Entities.TieredPrice;
 import com.example.Book.now.exceptions.VehicleNotAvailableException;
 import com.example.Book.now.repository.CouponRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +32,6 @@ public class BookingPriceService {
         Float tieredPriceDiscount = 0.00f;
         Float couponDiscountPercentage = 0.00f;
         for (LocalDate date = start; date.isBefore(end.plusDays(1)); date = date.plusDays(1)) {
-            // Do your job here with `date`.
             dayCnt ++;
             if (priceRepository.findByVehicleIdVehicleIdAndStoreIdStoreIdAndFromDateLessThanEqualAndToDateGreaterThanEqual(vehicleId, locationId, date, date).isPresent()) {
                 totalPrice += priceRepository.findByVehicleIdVehicleIdAndStoreIdStoreIdAndFromDateLessThanEqualAndToDateGreaterThanEqual(vehicleId, locationId, date, date).get().getPrice();
@@ -44,9 +45,12 @@ public class BookingPriceService {
             tieredPriceDiscount = tieredPriceRepository.findTopByDurationInDaysLessThanEqualOrderByDurationInDaysDesc(dayCnt).get().getDiscountPercentage();
             totalPrice = totalPrice - (0.01f * tieredPriceDiscount) * totalPrice;
         }
-        if(couponRepository.findById(couponCode).isPresent()){
-            couponDiscountPercentage = couponRepository.findById(couponCode).get().getDiscountPercentage();
-            totalPrice = totalPrice - (0.01f * couponDiscountPercentage) * totalPrice;
+        Optional<Coupon> coupon = couponRepository.findById(couponCode);
+        if(coupon.isPresent()){
+            if (!coupon.get().getExpired() && coupon.get().getExpiresAt().compareTo(new Date())>=0){
+                couponDiscountPercentage = coupon.get().getDiscountPercentage();
+                totalPrice = totalPrice - (0.01f * couponDiscountPercentage) * totalPrice;
+            }
         }
         return new BookingPriceDTO(
             totalPriceBeforeDiscount,

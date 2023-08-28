@@ -186,6 +186,7 @@ insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) va
 
 insert into coupon (coupon_id, discount_percentage, expires_at, expired) values ('7A75G5Y1', 10, '2022-11-01', true);
 insert into coupon (coupon_id, discount_percentage, expires_at, expired) values ('715M8J6J', 10, '2023-03-23', false);
+insert into coupon (coupon_id, discount_percentage, expires_at, expired) values ('AA234123', 10, '2024-03-23', false);
 
 
 insert into tiered_price (duration_in_days, discount_percentage, is_active) values (10, 8, true);

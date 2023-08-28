@@ -33,6 +33,21 @@ public class BookingPriceServiceTest {
 
         Assertions.assertEquals(bookingPrice.totalPriceAfterDiscount(), 2202.66f, 0.001, "Successfully returns final price");
 
+        //TEST WITH COUPONS
+        BookingPriceDTO bookingPrice2 = bookingPriceService.calculateBookingCost(1,1, new Date("01/15/2023"), new Date("02/03/2023"), "7A75G5Y1");
+
+        Assertions.assertEquals(bookingPrice2.couponDiscount(), 0, "Successfully finds coupon discount percentage if coupon is expired");
+
+        //TEST WITH COUPONS 2
+        BookingPriceDTO bookingPrice3 = bookingPriceService.calculateBookingCost(1,1, new Date("01/15/2023"), new Date("02/03/2023"), "715M8J6J");
+
+        Assertions.assertEquals(bookingPrice3.couponDiscount(), 0, "Successfully finds coupon discount percentage if coupon is expired (USING DATES)");
+
+        //TEST WITH COUPONS 3
+        BookingPriceDTO bookingPrice4 = bookingPriceService.calculateBookingCost(1,1, new Date("01/15/2023"), new Date("02/03/2023"), "AA234123");
+
+        Assertions.assertEquals(bookingPrice4.couponDiscount(), 10, "Successfully finds coupon discount percentage if coupon is not expired");
+
         Assertions.assertThrows(VehicleNotAvailableException.class, () -> bookingPriceService.calculateBookingCost(1,1, new Date("08/25/2022"), new Date("12/03/2023"), "aaaaaaaaa"), "Throws if there is no price available for this date range");
     }
 
