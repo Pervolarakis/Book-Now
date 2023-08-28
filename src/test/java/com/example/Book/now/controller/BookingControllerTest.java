@@ -274,7 +274,7 @@ public class BookingControllerTest {
             .content(mapper.writeValueAsString(updateBookingRequestBody)))
             .andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
         updateBookingRequestBody.setVehicleId(1);
-        //crate with invalid location id
+        //create with invalid location id
         updateBookingRequestBody.setPickupLocationId(55);
         mvc.perform(put("/api/v1/booking/1")
             .contentType(MediaType.APPLICATION_JSON)
