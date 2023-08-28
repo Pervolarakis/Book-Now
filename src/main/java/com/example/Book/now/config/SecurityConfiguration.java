@@ -49,7 +49,7 @@ public class SecurityConfiguration {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/api/v1/auth/**", "/api/v1/verify", "/error", "/api/v1/profile/**", "/api/v1/inventory/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/v1/vehicle", "/api/v1/vehicle/{vehicleId}", "/api/v1/location/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/vehicle", "/api/v1/vehicle/{vehicleId}", "/api/v1/location/**", "/api/v1/review/**").permitAll()
                 .requestMatchers("/api/v1/vehicle/**", "/api/v1/booking/location/**", "/api/v1/coupon/**", "/api/v1/tiered_price/**").hasAuthority("SCOPE_ROLE_ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/v1/booking").hasAuthority("SCOPE_ROLE_ADMIN")
                 .requestMatchers(HttpMethod.POST, "/api/v1/location/**").hasAuthority("SCOPE_ROLE_ADMIN")
