@@ -70,4 +70,14 @@ public class ReviewServiceTest {
         Integer reviewId = reviewService.updateReview(updateReviewRequestBody, "kpink0@telegraph.co.uk", 1);
         Assertions.assertEquals(reviewRepository.findById(reviewId).get().getReviewText(), "updated-review", "Review successfully updated");
     }
+
+    @Test
+    @Transactional
+    public void deleteReviewTest(){
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> reviewService.deleteReview("kpink0@telegraph.co.uk", 55), "Throws if booking doesnt exist");
+        Assertions.assertThrows(NotPermittedException.class, () -> reviewService.deleteReview("pemanuele1@census.gov", 1), "Throws if user doesnt own review");
+        Assertions.assertDoesNotThrow(() -> reviewService.deleteReview("kpink0@telegraph.co.uk", 1), "Does not throw if user owns the review and review exists");
+        Assertions.assertEquals(reviewRepository.findById(1).isPresent(), false, "Review is successfully deleted");
+
+    }
 }

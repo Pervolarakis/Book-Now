@@ -94,4 +94,16 @@ public class ReviewService {
         Review savedReview = reviewRepository.save(review);
         return savedReview.getReviewId();
     }
+
+    public void deleteReview(String userEmail, Integer reviewId) throws ResourceNotFoundException, NotPermittedException {
+        UserProfile userProfile = userProfileRepository.findByUserIdEmail(userEmail)
+                .orElseThrow(() -> new UserDoesntExistsException());
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new ResourceNotFoundException("Review"));
+
+        if (review.getUserId().getUserId() != userProfile.getUserId()){
+            throw new NotPermittedException();
+        }
+        reviewRepository.deleteById(reviewId);
+    }
 }
