@@ -1,6 +1,7 @@
 package com.example.Book.now.service;
 
 import com.example.Book.now.RequestBodies.CreateReviewRequestBody;
+import com.example.Book.now.RequestBodies.UpdateReviewRequestBody;
 import com.example.Book.now.exceptions.NotPermittedException;
 import com.example.Book.now.exceptions.ResourceNotFoundException;
 import com.example.Book.now.repository.ReviewRepository;
@@ -55,5 +56,18 @@ public class ReviewServiceTest {
         Assertions.assertThrows(NotPermittedException.class, () -> reviewService.createReview(createReviewRequestBody, "pemanuele1@census.gov"), "Throws if user doesnt own the booking");
         Integer reviewId =  reviewService.createReview(createReviewRequestBody, "kpink0@telegraph.co.uk");
         Assertions.assertNotNull(reviewRepository.findById(reviewId), "Review is successfully created");
+    }
+
+    @Test
+    @Transactional
+    public void updateReviewTest() throws NotPermittedException, ResourceNotFoundException {
+        UpdateReviewRequestBody updateReviewRequestBody = new UpdateReviewRequestBody();
+        updateReviewRequestBody.setReviewText("updated-review");
+        updateReviewRequestBody.setRating(5);
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> reviewService.updateReview(updateReviewRequestBody, "kpink0@telegraph.co.uk", 55), "Throws if review doesnt exist");
+        Assertions.assertThrows(NotPermittedException.class, () -> reviewService.updateReview(updateReviewRequestBody, "pemanuele1@census.gov", 1), "Throws if user doesnt own review");
+        Assertions.assertDoesNotThrow(() -> reviewService.updateReview(updateReviewRequestBody, "kpink0@telegraph.co.uk", 1), "Does not throw if user owns the review and review exists");
+        Integer reviewId = reviewService.updateReview(updateReviewRequestBody, "kpink0@telegraph.co.uk", 1);
+        Assertions.assertEquals(reviewRepository.findById(reviewId).get().getReviewText(), "updated-review", "Review successfully updated");
     }
 }

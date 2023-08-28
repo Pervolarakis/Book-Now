@@ -4,6 +4,7 @@ import com.example.Book.now.Entities.Booking;
 import com.example.Book.now.Entities.Review;
 import com.example.Book.now.Entities.UserProfile;
 import com.example.Book.now.RequestBodies.CreateReviewRequestBody;
+import com.example.Book.now.RequestBodies.UpdateReviewRequestBody;
 import com.example.Book.now.exceptions.NotPermittedException;
 import com.example.Book.now.exceptions.ResourceNotFoundException;
 import com.example.Book.now.exceptions.UserDoesntExistsException;
@@ -74,6 +75,22 @@ public class ReviewService {
         review.setRating(createReviewRequestBody.getRating());
         review.setBookingId(booking);
         review.setUserId(userProfile);
+        Review savedReview = reviewRepository.save(review);
+        return savedReview.getReviewId();
+    }
+
+    public Integer updateReview(UpdateReviewRequestBody updateReviewRequestBody, String userEmail, Integer reviewId) throws ResourceNotFoundException, NotPermittedException {
+        UserProfile userProfile = userProfileRepository.findByUserIdEmail(userEmail)
+            .orElseThrow(() -> new UserDoesntExistsException());
+        Review review = reviewRepository.findById(reviewId)
+            .orElseThrow(() -> new ResourceNotFoundException("Review"));
+
+        if (review.getUserId().getUserId() != userProfile.getUserId()){
+            throw new NotPermittedException();
+        }
+
+        review.setReviewText(updateReviewRequestBody.getReviewText());
+        review.setRating(updateReviewRequestBody.getRating());
         Review savedReview = reviewRepository.save(review);
         return savedReview.getReviewId();
     }
