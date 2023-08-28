@@ -14,4 +14,5 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, Intege
     //findBy<foreign key field name><foreign key's primary key name>
     Optional<UserProfile> findByUserIdUserId(Integer userAccountId);
 
+    Optional<UserProfile> findByUserIdEmail(String email);
 }
