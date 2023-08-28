@@ -165,7 +165,7 @@ public class BookingControllerTest {
         ObjectMapper mapper = new ObjectMapper();
         CreateBookingRequestBody createBookingRequestBody = new CreateBookingRequestBody();
         createBookingRequestBody.setPickupDate(null);
-        createBookingRequestBody.setDeliveryDate(new Date("05/11/2023"));
+        createBookingRequestBody.setDeliveryDate(new Date("11/05/2023"));
         createBookingRequestBody.setQuantity(1);
         createBookingRequestBody.setVehicleId(1);
         createBookingRequestBody.setPickupLocationId(2);
@@ -173,13 +173,13 @@ public class BookingControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .content(mapper.writeValueAsString(createBookingRequestBody)))
             .andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
-        createBookingRequestBody.setPickupDate(new Date("02/11/2023"));
+        createBookingRequestBody.setPickupDate(new Date("10/30/2023"));
         createBookingRequestBody.setDeliveryDate(null);
         mvc.perform(post("/api/v1/booking")
             .contentType(MediaType.APPLICATION_JSON)
             .content(mapper.writeValueAsString(createBookingRequestBody)))
             .andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
-        createBookingRequestBody.setDeliveryDate(new Date("05/11/2023"));
+        createBookingRequestBody.setDeliveryDate(new Date("11/05/2023"));
         createBookingRequestBody.setQuantity(null);
         mvc.perform(post("/api/v1/booking")
             .contentType(MediaType.APPLICATION_JSON)
@@ -262,8 +262,8 @@ public class BookingControllerTest {
     public void updateBookingAsOwnerTest() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         UpdateBookingRequestBody updateBookingRequestBody = new UpdateBookingRequestBody();
-        updateBookingRequestBody.setPickupDate(new Date("02/11/2023"));
-        updateBookingRequestBody.setDeliveryDate(new Date("05/11/2023"));
+        updateBookingRequestBody.setPickupDate(new Date("11/02/2023"));
+        updateBookingRequestBody.setDeliveryDate(new Date("11/05/2023"));
         updateBookingRequestBody.setQuantity(1);
         updateBookingRequestBody.setVehicleId(1);
         updateBookingRequestBody.setPickupLocationId(2);
@@ -274,7 +274,7 @@ public class BookingControllerTest {
             .content(mapper.writeValueAsString(updateBookingRequestBody)))
             .andExpect(status().is(HttpStatus.BAD_REQUEST.value()));
         updateBookingRequestBody.setVehicleId(1);
-        //crate with invalid location id
+        //create with invalid location id
         updateBookingRequestBody.setPickupLocationId(55);
         mvc.perform(put("/api/v1/booking/1")
             .contentType(MediaType.APPLICATION_JSON)
@@ -310,8 +310,8 @@ public class BookingControllerTest {
     public void updateBookingAsAdminTest() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         UpdateBookingRequestBody updateBookingRequestBody = new UpdateBookingRequestBody();
-        updateBookingRequestBody.setPickupDate(new Date("02/11/2023"));
-        updateBookingRequestBody.setDeliveryDate(new Date("05/11/2023"));
+        updateBookingRequestBody.setPickupDate(new Date("11/02/2023"));
+        updateBookingRequestBody.setDeliveryDate(new Date("11/05/2023"));
         updateBookingRequestBody.setQuantity(1);
         updateBookingRequestBody.setVehicleId(1);
         updateBookingRequestBody.setPickupLocationId(2);

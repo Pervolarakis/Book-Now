@@ -41,7 +41,7 @@ create table user_profile(
 );
 
 create table store_location (
-	store_id integer unique,
+	store_id integer auto_increment,
 	store_name text,
 	country varchar(80),
 	state varchar(80),
@@ -61,6 +61,7 @@ create table inventory (
 create table booking (
 	booking_id integer auto_increment,
 	booking_creation_date date,
+	price float,
 	vehicle_id integer references vehicle(vehicle_id),
 	quantity integer,
 	pickup_date date,
@@ -97,16 +98,17 @@ create table coupon (
 );
 
 create table tiered_price (
-	tiered_price_id integer not null,
+	tiered_price_id integer auto_increment,
 	duration_in_days integer,
 	discount_percentage float,
+	is_active boolean,
 	primary key(tiered_price_id)
 );
 
 create table review (
-	review_id integer not null,
+	review_id integer auto_increment,
 	booking_id integer references booking(booking_id),
-	user_id integer references user_account(user_id),
+	user_id integer references user_profile(user_id),
 	review_created_at date,
 	rating integer,
 	review_text text,
@@ -127,8 +129,9 @@ insert into user_profile (user_id, first_name, last_name, phone, country, state,
 insert into user_profile (user_id, first_name, last_name, phone, country, state, city, date_of_birth) values (3, 'Zenia', 'Landreth', '7846473051', 'Yemen', null, 'Dhī as Sufāl', '2022-08-07');
 insert into user_profile (user_id, first_name, last_name, phone, country, state, city, date_of_birth) values (4, 'Liv', 'Thunderman', '3404011720', 'Russia', null, 'Luga', '2023-07-02');
 
-insert into store_location (store_id, store_name, country, state, city, full_address) values (1, 'Diqing Airport', 'Cuba', null, 'Palma Soriano', '884 Kipling Plaza');
-insert into store_location (store_id, store_name, country, state, city, full_address) values (2, 'Karumba Airport', 'Japan', null, 'Miyako', '2 Jackson Pass');
+insert into store_location (store_name, country, state, city, full_address) values ('Diqing Airport', 'Cuba', null, 'Palma Soriano', '884 Kipling Plaza');
+insert into store_location (store_name, country, state, city, full_address) values ('Karumba Airport', 'Japan', null, 'Miyako', '2 Jackson Pass');
+insert into store_location (store_name, country, state, city, full_address) values ('Heraklion Airport', 'Greece', null, 'heraklion', 'random-addr 1');
 
 insert into inventory (vehicle_id, quantity, store_id) values (1, 2, 1);
 insert into inventory (vehicle_id, quantity, store_id) values (2, 0, 1);
@@ -137,19 +140,19 @@ insert into inventory (vehicle_id, quantity, store_id) values (1, 8, 2);
 insert into inventory (vehicle_id, quantity, store_id) values (2, 5, 2);
 insert into inventory (vehicle_id, quantity, store_id) values (3, 4, 2);
 
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-11-23', 1, 2, '2022-07-15', '2022-08-11', 1, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-04-13', 2, 2, '2022-07-09', '2022-08-14', 2, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-08-20', 3, 1, '2022-07-15', '2022-08-24', 3, 2);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-03-20', 1, 3, '2022-07-17', '2022-08-11', 4, 2);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-01-20', 2, 2, '2022-07-28', '2022-08-16', 4, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-03-23', 3, 1, '2022-08-08', '2022-08-25', 1, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-05-22', 1, 2, '2022-08-09', '2022-08-16', 1, 2);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-12-18', 1, 2, '2022-07-23', '2022-08-13', 2, 2);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-10-30', 2, 2, '2022-07-18', '2022-08-20', 3, 2);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-04-08', 3, 3, '2022-08-08', '2022-08-13', 3, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2023-04-29', 3, 1, '2022-08-08', '2022-08-23', 2, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-12-22', 2, 1, '2022-07-23', '2022-08-13', 2, 1);
-insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id) values ('2022-12-14', 1, 3, '2022-08-07', '2022-08-19', 2, 2);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2022-11-23', 1, 2, '2022-07-15', '2022-08-11', 1, 1, 55.63);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-04-13', 2, 2, '2022-07-09', '2022-08-14', 2, 1, 103.20);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2022-08-20', 3, 1, '2022-07-15', '2022-08-24', 3, 2, 98.00);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-03-20', 1, 3, '2022-07-17', '2022-08-11', 4, 2, 400.23);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-01-20', 2, 2, '2022-07-28', '2022-08-16', 4, 1, 543.12);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-03-23', 3, 1, '2022-08-08', '2022-08-25', 1, 1, 103.22);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-05-22', 1, 2, '2022-08-09', '2022-08-16', 1, 2, 99.12);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2022-12-18', 1, 2, '2022-07-23', '2022-08-13', 2, 2, 194.65);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2022-10-30', 2, 2, '2022-07-18', '2022-08-20', 3, 2, 340.33);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-04-08', 3, 3, '2022-08-08', '2022-08-13', 3, 1, 182.12);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2023-04-29', 3, 1, '2022-08-08', '2022-08-23', 2, 1, 56.33);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2022-12-22', 2, 1, '2022-07-23', '2022-08-13', 2, 1, 190.00);
+insert into booking (booking_creation_date, vehicle_id, quantity, pickup_date, delivery_date, customer_id, pickup_location_id, price) values ('2022-12-14', 1, 3, '2022-08-07', '2022-08-19', 2, 2, 139.12);
 
 insert into booking_status (booking_id, status_date, status) values (1, '2023-06-06', 'Refunded/Completed');
 insert into booking_status (booking_id, status_date, status) values (2, '2023-05-27', 'Payment Confirmed');
@@ -169,33 +172,34 @@ insert into booking_status (booking_id, status_date, status) values (2, '2023-04
 insert into booking_status (booking_id, status_date, status) values (2, '2022-08-06', 'cancelled');
 insert into booking_status (booking_id, status_date, status) values (3, '2022-12-10', 'Rental Returned');
 
-insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (1, 1, 1, '2022-08-22', '2023-09-12', 125.88);
+insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (1, 1, 1, '2022-08-22', '2023-01-22', 125.88);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (3, 1, 2, '2023-04-08', '2023-05-30', 143.48);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (2, 3, 2, '2022-02-20', '2022-08-21', 125.97);
-insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (4, 1, 1, '2023-01-23', '2022-10-30', 120.03);
+insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (4, 1, 1, '2023-01-23', '2023-10-30', 120.03);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (5, 1, 2, '2023-12-30', '2023-03-26', 192.32);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (6, 3, 2, '2023-01-28', '2023-03-12', 22.07);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (7, 2, 1, '2023-03-18', '2023-04-28', 157.68);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (8, 3, 2, '2023-02-21', '2023-09-09', 194.42);
-insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (9, 1, 2, '2022-11-19', '2023-01-12', 176.43);
+insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (9, 1, 2, '2023-10-01', '2023-11-12', 176.43);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (10, 2, 1, '2023-05-14', '2023-08-21', 48.84);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (11, 3, 2, '2022-01-21', '2022-10-01', 160.73);
 insert into price (price_id, vehicle_id, store_id, from_date, to_date, price) values (12, 2, 1, '2022-04-03', '2022-08-26', 99.52);
 
 insert into coupon (coupon_id, discount_percentage, expires_at, expired) values ('7A75G5Y1', 10, '2022-11-01', true);
 insert into coupon (coupon_id, discount_percentage, expires_at, expired) values ('715M8J6J', 10, '2023-03-23', false);
+insert into coupon (coupon_id, discount_percentage, expires_at, expired) values ('AA234123', 10, '2024-03-23', false);
 
 
-insert into tiered_price (tiered_price_id, duration_in_days, discount_percentage) values (1, 10, 8);
-insert into tiered_price (tiered_price_id, duration_in_days, discount_percentage) values (2, 20, 10);
-insert into tiered_price (tiered_price_id, duration_in_days, discount_percentage) values (3, 30, 13);
+insert into tiered_price (duration_in_days, discount_percentage, is_active) values (10, 8, true);
+insert into tiered_price (duration_in_days, discount_percentage, is_active) values (20, 10, true);
+insert into tiered_price (duration_in_days, discount_percentage, is_active) values (30, 13, true);
 
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (1, 1, 1, '2022-12-28', 1, 'Great car!');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (2, 2, 2, '2022-11-03', 1, 'Smooth ride.');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (3, 3, 3, '2022-12-21', 1, 'Poor fuel efficiency.');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (4, 4, 4, '2022-12-06', 2, 'Great car!');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (5, 5, 4, '2022-11-19', 4, 'Terrible experience.');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (6, 6, 1, '2023-04-29', 4, 'Comfortable interior.');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (7, 7, 1, '2023-03-30', 5, 'Comfortable interior.');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (8, 8, 2, '2023-01-21', 5, 'Smooth ride.');
-insert into review (review_id, booking_id, user_id, review_created_at, rating, review_text) values (9, 9, 3, '2023-04-17', 1, 'Smooth ride.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (1, 1, '2022-12-28', 1, 'Great car!');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (2, 2, '2022-11-03', 1, 'Smooth ride.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (3, 3, '2022-12-21', 1, 'Poor fuel efficiency.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (4, 4, '2022-12-06', 2, 'Great car!');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (5, 4, '2022-11-19', 4, 'Terrible experience.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (6, 1, '2023-04-29', 4, 'Comfortable interior.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (7, 1, '2023-03-30', 5, 'Comfortable interior.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (8, 2, '2023-01-21', 5, 'Smooth ride.');
+insert into review (booking_id, user_id, review_created_at, rating, review_text) values (9, 3, '2023-04-17', 1, 'Smooth ride.');

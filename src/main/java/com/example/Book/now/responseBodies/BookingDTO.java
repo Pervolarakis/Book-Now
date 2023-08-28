@@ -14,6 +14,7 @@ public record BookingDTO(
         Date pickupDate,
         Date deliveryDate,
         Integer customerId,
-        Integer pickupLocationId
+        Integer pickupLocationId,
+        Float price
 ) {
 }

@@ -40,7 +40,7 @@ create table user_profile(
 );
 
 create table store_location (
-	store_id integer unique,
+	store_id serial,
 	store_name text,
 	country varchar(80),
 	state varchar(80),
@@ -63,6 +63,7 @@ create table booking (
 	vehicle_id integer references vehicle(vehicle_id),
 	quantity integer,
 	pickup_date date,
+	price float,
 	delivery_date date,
 	customer_id integer references user_profile(user_id),
 	pickup_location_id integer references store_location(store_id),
@@ -96,16 +97,17 @@ create table coupon (
 );
 
 create table tiered_price (
-	tiered_price_id integer not null,
+	tiered_price_id serial,
 	duration_in_days integer,
 	discount_percentage float,
+	is_active boolean,
 	primary key(tiered_price_id)
 );
 
 create table review (
-	review_id integer not null,
+	review_id serial,
 	booking_id integer references booking(booking_id),
-	user_id integer references user_account(user_id),
+	user_id integer references user_profile(user_id),
 	review_created_at date,
 	rating integer,
 	review_text text,

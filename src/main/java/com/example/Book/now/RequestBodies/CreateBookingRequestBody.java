@@ -1,8 +1,5 @@
 package com.example.Book.now.RequestBodies;
 
-import com.example.Book.now.Entities.StoreLocation;
-import com.example.Book.now.Entities.UserAccount;
-import com.example.Book.now.Entities.Vehicle;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -27,4 +24,5 @@ public class CreateBookingRequestBody {
     private Date deliveryDate;
     @NotNull(message = "Please provide a store id")
     private Integer pickupLocationId;
+    private String coupon;
 }

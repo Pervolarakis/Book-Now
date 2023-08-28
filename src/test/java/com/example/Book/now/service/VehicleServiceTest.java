@@ -40,7 +40,7 @@ public class VehicleServiceTest {
 
     @Test
     @Transactional
-    public void createVehicleTest(){
+    public void createVehicleTest() throws ResourceNotFoundException {
         CreateVehicleRequestBody vehicleRequestBody = new CreateVehicleRequestBody();
         vehicleRequestBody.setName("test-vehicle");
         vehicleRequestBody.setBrand("Acura");
@@ -55,7 +55,7 @@ public class VehicleServiceTest {
         vehicleRequestBody.setAc(TRUE);
         vehicleRequestBody.setPhoto("http://dummyimage.com/119x100.png/5fa2dd/ffffff");
         Integer vehicleId = vehicleService.createNewVehicle(vehicleRequestBody);
-        Assertions.assertDoesNotThrow(() -> vehicleService.findVehicleById(vehicleId), "Vehicle exists");
+        Assertions.assertNotNull(vehicleService.findVehicleById(vehicleId), "Vehicle exists");
     }
 
     @Test
@@ -76,7 +76,7 @@ public class VehicleServiceTest {
         updateVehicleRequestBody.setAc(TRUE);
         updateVehicleRequestBody.setPhoto("http://dummyimage.com/119x100.png/5fa2dd/ffffff");
         Integer vehicleId = vehicleService.updateVehicleById(updateVehicleRequestBody);
-        Assertions.assertDoesNotThrow(() -> vehicleService.findVehicleById(vehicleId), "Vehicle exists");
+        Assertions.assertNotNull(vehicleService.findVehicleById(vehicleId), "Vehicle exists");
         VehicleDTO vehicleDTO = vehicleService.findVehicleById(vehicleId);
         Assertions.assertEquals("test-vehicle", vehicleDTO.name(), "Vehicle successfully updated!");
     }
