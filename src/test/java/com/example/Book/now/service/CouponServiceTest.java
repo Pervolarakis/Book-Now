@@ -27,7 +27,7 @@ public class CouponServiceTest {
     public void getAllCouponsTest(){
         Assertions.assertDoesNotThrow(() -> couponService.getAllCoupons(), "Successfully returns all coupons");
         List<CouponDTO> allCoupons = couponService.getAllCoupons();
-        Assertions.assertEquals(allCoupons.size(), 2, "Successfully returns all coupons");
+        Assertions.assertEquals(allCoupons.size(), 3, "Successfully returns all coupons");
     }
 
     @Test

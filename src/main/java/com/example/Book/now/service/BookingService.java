@@ -8,10 +8,7 @@ import com.example.Book.now.exceptions.NotPermittedException;
 import com.example.Book.now.exceptions.ResourceNotFoundException;
 import com.example.Book.now.exceptions.UserDoesntExistsException;
 import com.example.Book.now.exceptions.VehicleNotAvailableException;
-import com.example.Book.now.repository.BookingRepository;
-import com.example.Book.now.repository.StoreLocationRepository;
-import com.example.Book.now.repository.UserAccountRepository;
-import com.example.Book.now.repository.VehicleRepository;
+import com.example.Book.now.repository.*;
 import com.example.Book.now.responseBodies.BookingDTO;
 import com.example.Book.now.responseBodies.VehicleDTO;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +29,7 @@ public class BookingService {
     private final VehicleRepository vehicleRepository;
     private final StoreLocationRepository storeLocationRepository;
     private final BookingPriceService bookingPriceService;
+    private final InventoryRepository inventoryRepository;
 
     public BookingDTO getBookingById(Integer bookingId, String userMail) throws ResourceNotFoundException, NotPermittedException {
         UserAccount userAccount = userAccountRepository.findUserAccountByEmailIgnoreCase(userMail)
@@ -174,6 +173,17 @@ public class BookingService {
         booking.setVehicleId(vehicle);
         StoreLocation storeLocation = storeLocationRepository.findById(createBookingRequestBody.getPickupLocationId())
             .orElseThrow(()-> new ResourceNotFoundException("Location"));
+
+        Optional<Inventory> availableInventory = inventoryRepository.findByStoreIdStoreIdAndVehicleIdVehicleId(storeLocation.getStoreId(), vehicle.getVehicleId());
+
+        if (!availableInventory.isPresent()){
+            throw new VehicleNotAvailableException();
+        }
+
+        if (availableInventory.get().getQuantity() == 0){
+            throw new VehicleNotAvailableException();
+        }
+
         booking.setPickupLocationId(storeLocation);
         String coupon = createBookingRequestBody.getCoupon()!=null ? createBookingRequestBody.getCoupon() : "";
         booking.setPrice(bookingPriceService.calculateBookingCost(
@@ -203,6 +213,17 @@ public class BookingService {
         booking.setQuantity(updateBookingRequestBody.getQuantity());
         StoreLocation storeLocation = storeLocationRepository.findById(updateBookingRequestBody.getPickupLocationId())
             .orElseThrow(()-> new ResourceNotFoundException("Location"));
+
+        Optional<Inventory> availableInventory = inventoryRepository.findByStoreIdStoreIdAndVehicleIdVehicleId(storeLocation.getStoreId(), vehicle.getVehicleId());
+
+        if (!availableInventory.isPresent()){
+            throw new VehicleNotAvailableException();
+        }
+
+        if (availableInventory.get().getQuantity() == 0){
+            throw new VehicleNotAvailableException();
+        }
+
         booking.setPickupLocationId(storeLocation);
         bookingRepository.save(booking);
         booking.setPrice(bookingPriceService.calculateBookingCost(

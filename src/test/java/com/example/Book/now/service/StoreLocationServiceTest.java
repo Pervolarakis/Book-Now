@@ -31,7 +31,7 @@ public class StoreLocationServiceTest {
     public void gerAllStoreLocationsTest(){
         Assertions.assertDoesNotThrow(() -> storeLocationService.getAllStoreLocations(), "Successfully returns all stores");
         List<StoreLocationDTO> allStoreLocations = storeLocationService.getAllStoreLocations();
-        Assertions.assertEquals(allStoreLocations.size(), 2, "Returns right amount of stores");
+        Assertions.assertEquals(allStoreLocations.size(), 3, "Returns right amount of stores");
     }
 
     @Test

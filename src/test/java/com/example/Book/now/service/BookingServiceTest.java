@@ -80,6 +80,11 @@ public class BookingServiceTest {
         Integer bookingId = bookingService.createBooking(createBookingRequestBody, "admin@mail.com");
         BookingDTO booking = bookingService.getBookingById(bookingId, "admin@mail.com");
         Assertions.assertEquals(booking.price(), 1587.87f, 0.001, "Successfully calculates and saves price");
+        createBookingRequestBody.setPickupLocationId(3);
+        Assertions.assertThrows(VehicleNotAvailableException.class, () -> bookingService.createBooking(createBookingRequestBody, "admin@mail.com"), "Throws if vehicle is not available");
+        createBookingRequestBody.setPickupLocationId(1);
+        createBookingRequestBody.setVehicleId(2);
+        Assertions.assertThrows(VehicleNotAvailableException.class, () -> bookingService.createBooking(createBookingRequestBody, "admin@mail.com"), "Throws if vehicle is not available");
     }
 
     @Test
@@ -106,5 +111,10 @@ public class BookingServiceTest {
         Integer bookingId = bookingService.updateBookingById(updateBookingRequestBody, 1,"admin@mail.com");
         BookingDTO booking = bookingService.getBookingById(bookingId, "admin@mail.com");
         Assertions.assertEquals(booking.price(), 1587.87f, 0.001, "Successfully calculates and saves price");
+        updateBookingRequestBody.setPickupLocationId(3);
+        Assertions.assertThrows(VehicleNotAvailableException.class, () -> bookingService.updateBookingById(updateBookingRequestBody, 1, "kpink0@telegraph.co.uk"), "Throws if vehicle is not available");
+        updateBookingRequestBody.setPickupLocationId(1);
+        updateBookingRequestBody.setVehicleId(2);
+        Assertions.assertThrows(VehicleNotAvailableException.class, () -> bookingService.updateBookingById(updateBookingRequestBody, 1, "kpink0@telegraph.co.uk"), "Throws if vehicle is not available");
     }
 }

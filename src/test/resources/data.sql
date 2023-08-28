@@ -131,6 +131,7 @@ insert into user_profile (user_id, first_name, last_name, phone, country, state,
 
 insert into store_location (store_name, country, state, city, full_address) values ('Diqing Airport', 'Cuba', null, 'Palma Soriano', '884 Kipling Plaza');
 insert into store_location (store_name, country, state, city, full_address) values ('Karumba Airport', 'Japan', null, 'Miyako', '2 Jackson Pass');
+insert into store_location (store_name, country, state, city, full_address) values ('Heraklion Airport', 'Greece', null, 'heraklion', 'random-addr 1');
 
 insert into inventory (vehicle_id, quantity, store_id) values (1, 2, 1);
 insert into inventory (vehicle_id, quantity, store_id) values (2, 0, 1);
